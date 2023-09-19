@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <h1>Password Manager</h1>
+        <h2>{{username}}</h2>
+    </head>
+    <body>
+        {% if user_data %}
+        {%for data in user_data %}
+        <h2>{{data.site}}</h2>
+            {% if data.email %}
+            <li>{{data.email}}</li>
+            {% endif %}
+            {% if data.username %}
+            <li>{{data.username}}</li>
+            {% endif %}
+            {% if data.password %}
+            <li>{{data.password}}</li>
+            {% endif %}
+        {% endfor %}
+        {% endif %}
+        <br>
+        <a href ="{% url 'add_site' username %}" class="button">Add Site</a>
+        <a href ="{% url 'logout' %}" class="button">Logout</a>
+    </body>
+</html>

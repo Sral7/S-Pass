@@ -1,0 +1,20 @@
+<html>
+    <head>
+        <h1>Home Page</h1>
+    </head>
+    <body>
+        <h1>Users:</h1>
+        <ul>
+            {% for user in users %}
+            <li>{{user.user}}</li>
+            {% endfor %}
+        </ul>
+        <br>
+        <h2>Passwors:</h2>
+        <ul>
+            {%for pass in data%}
+            <li>{{pass.password}}</li>
+            {% endfor %}
+        </ul>
+    </body>
+</html>

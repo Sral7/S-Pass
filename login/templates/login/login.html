@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <h1>Login</h1>
+    </head>
+    <body>
+        <form method="post">
+            {% csrf_token %}
+            {{form.username.label_tag}}{{form.username}}
+            {{form.password.label_tag}}{{form.password}}
+            <br><br>
+            <button type="submit">Login</button>
+            <a href ="{% url 'register_user' %}" class="button">Create User</a>
+        </form>
+    </body>
+</html>

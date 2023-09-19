@@ -1,0 +1,13 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <h1>Enter Decryption Pin</h1>
+    </head>
+    <body>
+        <form method="post">
+            {% csrf_token %}
+            {{form.as_p}}
+            <button type="submit">Enter Pin</button>
+        </form>
+    </body>
+</html>
