@@ -37,6 +37,13 @@ class userData(models.Model):
         self.password = password
         self.cipher_suite = Fernet(base64.urlsafe_b64encode(base64.b64decode(request.session['KDFP'])))
     
+    def decrypt_entry(self):
+        if self.cipher_suite:
+            dec_email = self.decrypt_data(self.enc_email)
+            dec_username= self.decrypt_data(self.enc_username)
+            dec_password = self.decrypt_data(self.enc_password)
+        return {'site': self.site, 'dec_username':dec_username, 'dec_email':dec_email, 'dec_password':dec_password}
+    
     @classmethod
     def filter_decrypt(cls,request,**kwargs):
         queryset = cls.objects.filter(**kwargs)

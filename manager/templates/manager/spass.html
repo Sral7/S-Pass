@@ -17,10 +17,13 @@
             {% if data.password %}
             <li>{{data.password}}</li>
             {% endif %}
+            <a href = "{% url 'edit_site' username data.id%}"><button type ='button'>Edit Site</button></a><br>
+            
         {% endfor %}
         {% endif %}
         <br>
-        <a href ="{% url 'add_site' username %}" class="button">Add Site</a>
-        <a href ="{% url 'logout' %}" class="button">Logout</a>
+        <a href ="{% url 'add_site' username %}"><button type='button'>Add Site</button></a>
+        <a href ="{% url 'logout' %}"><button type='button'>Logout</button></a>
+        <a href = "{% url 'settings' username %}"> <button type='button'>Settings</button></a>
     </body>
 </html>

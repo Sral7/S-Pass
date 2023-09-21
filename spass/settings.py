@@ -39,7 +39,6 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'debug_toolbar',
     'django.contrib.sessions',
-    'home.apps.HomeConfig',
     'login',
     'manager',
     'cryptography',
