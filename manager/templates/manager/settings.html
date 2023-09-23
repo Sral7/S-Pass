@@ -1,0 +1,15 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <h1>User Setttings</h1>
+    </head>
+    <body>
+        <h2>{{username}}</h2>
+
+        <h3>Change Password</h3>
+        <a href="{% url 'change_passcode' username %}"><button type="button">Change Password</button></a>
+
+        <h3>Change Pin</h3>
+        <a href = "{% url 'change_pin' username%}"><button type="button">Change Pin</button></a>
+    </body>
+</html>

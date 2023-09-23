@@ -1,0 +1,14 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <h1>Add Site</h1>
+    </head>
+    <body>
+        <form method="post">
+            {% csrf_token %}
+            {{form.as_p}}
+            <button type="submit">Edit Site</button>
+            <button>Generate Secure Password</button>
+        </form>
+    </body>
+</html>

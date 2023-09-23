@@ -9,8 +9,19 @@ class CreateUser(UserCreationForm):
         fields = ['username','password1','password2']
 
 class PinForm(forms.Form):
-    pin = forms.CharField(label='Enter Pin:', widget=forms.TextInput(attrs={'type':'password'}))
-    confirm_pin = forms.CharField(label='Confirm Pin:', widget=forms.TextInput(attrs={'type':'password'}))
+
+    pin = forms.CharField(
+        label='Enter PIN:',
+        min_length=4,  # You can specify the minimum and maximum lengths
+        max_length=8,  # for your PIN here.
+        widget=forms.TextInput(attrs={'type': 'number'}),
+    )
+    confirm_pin = forms.CharField(
+        label='Confirm PIN:',
+        min_length=4,
+        max_length=8,
+        widget=forms.TextInput(attrs={'type': 'number'}),
+    )
 
     def clean(self):
         cleaned_data = super().clean()
