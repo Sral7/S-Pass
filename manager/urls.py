@@ -5,6 +5,8 @@ appname ='manager'
 
 urlpatterns =[
     path('<str:username>/add_site/', views.add_site, name='add_site'),
+    path('<str:username>/settings/change_passcode', views.change_pass, name ='change_passcode'),
+    path('<str:username>/settings/change_pin', views.change_pin, name ='change_pin'),
     path('<str:username>/settings/',views.user_settings, name ='settings'),
     path('<str:username>/edit_site/<int:entry_id>/', views.edit_site, name='edit_site'),
     path('logout/', views.logout_manager, name ='logout'),

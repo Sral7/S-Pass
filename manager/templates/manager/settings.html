@@ -5,13 +5,11 @@
     </head>
     <body>
         <h2>{{username}}</h2>
-        <h3>Change Username</h3>
-        <button>Change Username</button>
 
         <h3>Change Password</h3>
-        <button>Change Password</button>
+        <a href="{% url 'change_passcode' username %}"><button type="button">Change Password</button></a>
 
         <h3>Change Pin</h3>
-        <button>Change Pin</button>
+        <a href = "{% url 'change_pin' username%}"><button type="button">Change Pin</button></a>
     </body>
 </html>
