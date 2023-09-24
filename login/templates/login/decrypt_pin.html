@@ -1,13 +1,22 @@
 <!DOCTYPE html>
+{% load static %}
 <html>
     <head>
-        <h1>Enter Decryption Pin</h1>
+        <link rel="stylesheet" href="{% static 'css/pin_style.css' %}">
+        <h1>S-Pass Password Manager</h1>
     </head>
     <body>
         <form method="post">
+            <h2 class="heading">Enter Decryption Pin</h2>
             {% csrf_token %}
-            {{form.as_p}}
-            <button type="submit">Enter Pin</button>
+            <p>
+                {{ form.pin.label_tag }}<br>
+                {{ form.pin }}<br><br>
+                {{form.confirm_pin.label_tag}}<br>
+                {{form.confirm_pin}}<br>
+
+            </p>
+            <button type="submit" class="rounded_button">Enter Pin</button>
         </form>
     </body>
 </html>

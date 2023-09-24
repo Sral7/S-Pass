@@ -1,16 +1,21 @@
 <!DOCTYPE html>
+{% load static%}
 <html>
     <head>
-        <h1>Login</h1>
+        <link rel="stylesheet" href="{% static 'css/login_style.css' %}">
+        <h1>S-Pass Password Manager</h1>
     </head>
     <body>
-        <form method="post">
+        <form method="post" class="form">
+            <h2>Login</h2>
             {% csrf_token %}
             {{form.username.label_tag}}{{form.username}}
             {{form.password.label_tag}}{{form.password}}
-            <br><br>
-            <button type="submit">Login</button>
-            <a href ="{% url 'register_user' %}"><button type="button">Create User</button></a>
+        
+            <button type="submit" class="rounded_button">Login</button>
+            <a href ="{% url 'register_user' %}" class="create_user_button">
+                <button type="button" class="rounded_button">Create User</button>
+            </a>
         </form>
     </body>
 </html>
