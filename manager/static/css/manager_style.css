@@ -1,0 +1,81 @@
+
+body{
+    background: linear-gradient(to bottom,rgba(8, 96, 80, 0.62) 5%, white 100%);
+    height: 100vh;
+}
+
+.user_data{
+    display: flex;
+    flex-wrap: wrap;
+
+}
+.user_data_item{
+    min-width: 200px;
+    max-width: 500px;
+    margin: 10px;
+    padding: 5px;
+    border: 3px solid black;
+    border-radius: 5px;
+    text-align: center;
+}
+
+.password {
+    visibility: hidden;
+    transition: visibility 0.3s ease-out 2s;
+
+  }
+  
+  .user_data_item:hover .password {
+    visibility: visible;
+    transition: visibility 0.3s ease-out 0s; 
+  }
+
+.user_data_item .rounded_button{
+    width:50%;
+    margin: 10px auto;
+    border-radius: 10px;
+    border: 0px;
+    background-color: rgba(8, 96, 80, 0.30);
+    padding-top: 5px;
+    padding-bottom: 5px;
+
+}
+.user_data_item .rounded_button:hover,
+.user_data_item .rounded_button:focus{
+    background-color: #E7A90B;
+    outline: none;
+}
+
+.user_data_item label{
+    font-weight: bold;
+    font-size: 16px;
+}
+
+.item_data{
+    text-align: justify;
+}
+.user_data_item h2{
+    text-transform: capitalize;
+}
+.user_data_item a{
+    color: black;
+    text-decoration: none;
+}
+
+.buttons{
+    display: flex;
+    flex-wrap: wrap;
+}
+.buttons .rounded_button{
+    min-width: 150px;
+    margin: 10px 10px;
+    border-radius: 10px;
+    border: 0px;
+    background-color: rgba(8, 96, 80, 0.30);
+    padding: 10px 0px;
+
+}
+.rounded_button:hover,.rounded_button:focus{
+    background-color: #E7A90B;
+    outline: none;
+}
