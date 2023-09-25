@@ -3,41 +3,48 @@
 <html>
     <head>
         <link rel="stylesheet" href="{% static 'css/manager_style.css' %}">
-        <h1>Password Manager</h1>
-        <h2>{{username}}</h2>
     </head>
     <body>
-        <div class="user_data">
-            {% if user_data %}
-                {%for data in user_data %}
-                    <div class="user_data_item">
-                        <a href="http://{{data.site}}.com" target="_blank">
-                            <h2>{{data.site}}</h2>
-                        </a>
-                        <div class="item_data">
-                            {% if data.email %}
-                            <label>Email:</label>
-                            <span>{{ data.email }}</span><br>
-                            {% endif %}
-                            {% if data.username %}
-                            <label>Username:</label>
-                            <span>{{ data.username }}</span><br>
-                            {% endif %}
-                            {% if data.password %}
-                            <label>Password:</label>
-                            <span class="password">{{ data.password }}</span><br>
-                            {% endif %}
+        <div class="sidebar">
+            <p>sidebar settings</p>
+        </div>
+        <div class="content">
+            <header class="manager_bar">
+                <div class="logo">
+                    <img src="{% static 'images/logo.png' %}" alt="Logo" class="logo">
+                </div>
+                <nav>
+                    <a href ="{% url 'logout' %}"><button type='button' class="rounded_button">Logout</button></a>
+                    <a href = "{% url 'settings' username %}"> <button type='button' class="rounded_button">Settings</button></a>
+                </nav>
+            </header>
+            <div class="user_data">
+                {% if user_data %}
+                    {%for data in user_data %}
+                        <div class="user_data_item">
+                            <a href="http://{{data.site}}.com" target="_blank">
+                                <h2>{{data.site}}</h2>
+                            </a>
+                            <div class="item_data">
+                                {% if data.username %}
+                                <label>Username:</label>
+                                <span>{{ data.username }}</span><br>
+                                {% endif %}
+                                {% if data.password %}
+                                <label>Password:</label>
+                                <span class="password">{{ data.password }}</span><br>
+                                {% endif %}
+                            </div>
+                            <a href = "{% url 'edit_site' username data.id%}"><button type ='button'  class="rounded_button">Edit Site</button></a><br>
                         </div>
-                        <a href = "{% url 'edit_site' username data.id%}"><button type ='button'  class="rounded_button">Edit Site</button></a><br>
-                    </div>
-                {% endfor %}
-            {% endif %}
+                    {% endfor %}
+                {% endif %}
+            </div>
+            <div class="buttons">
+                <a href ="{% url 'add_site' username %}"><button type='button' class="rounded_button">Add Site</button></a>
+            </div>
         </div>
-        <br>
-        <div class="buttons">
-            <a href ="{% url 'add_site' username %}"><button type='button' class="rounded_button">Add Site</button></a>
-            <a href ="{% url 'logout' %}"><button type='button' class="rounded_button">Logout</button></a>
-            <a href = "{% url 'settings' username %}"> <button type='button' class="rounded_button">Settings</button></a>
-        </div>
+
+
     </body>
 </html>

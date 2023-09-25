@@ -1,22 +1,52 @@
-
-body{
-    background: linear-gradient(to bottom,rgba(8, 96, 80, 0.62) 5%, white 100%);
-    height: 100vh;
+.manager_bar{
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    min-height: 100px;
 }
+.manager_bar .logo{
+    max-height: 75px;
+}
+.manager_bar .rounded_button{
+    background-color: #309EAC;
 
+}
+body{
+    background: rgb(51,184,182);
+    background: linear-gradient(180deg, rgba(51,184,182,1) 0%, rgba(227,234,231,1) 26%);
+    height: 100vh;
+    display: grid;
+    grid-template-columns: 200px auto;
+    grid-template-rows: auto;
+    gap: 10px;
+    margin: 0;
+    padding: 0;
+}
+.content{
+    display: flex;
+    flex-direction: column;
+}
 .user_data{
     display: flex;
     flex-wrap: wrap;
-
+    padding: 10px;
+}
+.sidebar{
+    max-width: 200px;
+    height: 100vh;
+    background-color: #38596C;
 }
 .user_data_item{
-    min-width: 200px;
+    min-width: 225px;
     max-width: 500px;
+    max-height: 200px;
     margin: 10px;
-    padding: 5px;
-    border: 3px solid black;
-    border-radius: 5px;
+    padding: 25px;
+    border: 0px solid black;
+    border-radius: 20px;
     text-align: center;
+    background-color: #D9D9D9;
+    
 }
 
 .password {
@@ -35,7 +65,7 @@ body{
     margin: 10px auto;
     border-radius: 10px;
     border: 0px;
-    background-color: rgba(8, 96, 80, 0.30);
+    background-color: #309EAC;
     padding-top: 5px;
     padding-bottom: 5px;
 
@@ -45,10 +75,14 @@ body{
     background-color: #E7A90B;
     outline: none;
 }
+.user_data_item span{
+    color: #0f6698;
+}
 
 .user_data_item label{
     font-weight: bold;
     font-size: 16px;
+    color:#0f6698;
 }
 
 .item_data{
@@ -66,12 +100,12 @@ body{
     display: flex;
     flex-wrap: wrap;
 }
-.buttons .rounded_button{
+.rounded_button{
     min-width: 150px;
     margin: 10px 10px;
     border-radius: 10px;
     border: 0px;
-    background-color: rgba(8, 96, 80, 0.30);
+    background-color: #309EAC;
     padding: 10px 0px;
 
 }
@@ -79,3 +113,4 @@ body{
     background-color: #E7A90B;
     outline: none;
 }
+
