@@ -15,14 +15,11 @@ from django.contrib.auth.decorators import login_required
 class LoginScreen(LoginView):
     template_name ='login/login.html'
     def get(self,request,*args,**kwargs):
-        print(self.request.user.is_authenticated)
         if self.request.user.is_authenticated:
             logout(request)
-            print('logged_out', self.request.user.is_authenticated)
         return super().get(request,*args,**kwargs)
     
     def form_valid(self, form: AuthenticationForm) -> HttpResponse:
-        print('testing',self.request.user.is_authenticated)
         user = form.get_user()
         login(self.request,user)
 
@@ -53,8 +50,6 @@ def register(request):
 
             create_pin_url = reverse('create_pin', args=[username])
             return redirect(create_pin_url)    
-        else:
-            print(form.errors)
     else:
         form = CreateUser()
     return render(request, 'login/create_user.html',{'form':form})
@@ -92,8 +87,6 @@ def enter_pin(request,username):
 
                 request.session['KDFP'] = base64.b64encode(key).decode()
                 return redirect(manager_url)
-            else:
-                print('Wrong Pin')
     else:
         form = PinForm()
     return render(request, 'login/decrypt_pin.html',{'form':form})
