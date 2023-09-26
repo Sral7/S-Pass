@@ -1,0 +1,45 @@
+Metadata-Version: 2.1
+Name: grab-favicon
+Version: 1.0.9
+Summary: Python functions to download favicons using internal google api
+Author: Emilio Mendoza
+Author-email: emen3998@gmail.com
+Keywords: python,favicon,downloader,grabber
+Classifier: Development Status :: 5 - Production/Stable
+Classifier: Intended Audience :: Developers
+Classifier: Programming Language :: Python :: 3
+Classifier: Operating System :: Unix
+Classifier: Operating System :: MacOS :: MacOS X
+Classifier: Operating System :: Microsoft :: Windows
+Description-Content-Type: text/markdown
+
+
+# grab_favicon
+
+Python functions to download favicons using internal google api
+
+## Installation
+
+Install function by running the following command.
+
+```bash
+  pip install grab_favicon
+```
+
+## Usage/Examples
+
+```python
+from grab_favicon import download_favicon, download_favicons
+
+# Single download
+download_favicon("google.com", size=128)
+
+# Multiple downloads
+websites = ["google.com", "stackoverflow.com", "github.com"]
+download_favicons(websites, path="my/path/favicons")
+```
+
+NOTE: The file is saved to a directory under the name *website.com*.png
+
+## Acknowledgements
+- [aanupam23](https://github.com/aanupam23/FaviconGrabber/tree/main)

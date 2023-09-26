@@ -14,7 +14,7 @@ class dataForm(forms.ModelForm):
 
     class Meta:
         model = userData
-        fields = ['site']
+        fields = ['site','url']
 
 class editForm(forms.Form):
     site = forms.CharField(max_length=255, required=True)

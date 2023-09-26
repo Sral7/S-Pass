@@ -3,20 +3,30 @@
 <html>
     <head>
         <link rel="stylesheet" href="{% static 'css/pin_style.css' %}">
-        <h1>S-Pass Password Manager</h1>
     </head>
     <body>
-        <form method="post">
-            <h2 class="heading">Enter Decryption Pin</h2>
-            {% csrf_token %}
-            <p>
-                {{ form.pin.label_tag }}<br>
-                {{ form.pin }}<br><br>
-                {{form.confirm_pin.label_tag}}<br>
-                {{form.confirm_pin}}<br>
+        <header>
+            <img src="{% static 'images/logo.png' %}" alt="Logo" class="logo-img">
+        </header>
+        <div class="pin">
+            <div class="pin-grid">
+                <form method="post">
+                    <h2 class="heading">Enter Decryption Pin</h2>
+                    {% csrf_token %}
+                    <div class="form-data">
+                        <label>{{ form.pin.label_tag }}</label>
+                        {{ form.pin }}<br><br>
+                    </div>
+                    <div class="form-data">
+                        <label>{{form.confirm_pin.label_tag}}</label>
+                        {{form.confirm_pin}}<br>
+                    </div>
+                    <div class="buttons">
+                        <button type="submit" class="rounded_button">Enter Pin</button>
+                    </div>
+                </form>
+            </div>
 
-            </p>
-            <button type="submit" class="rounded_button">Enter Pin</button>
-        </form>
+        </div>
     </body>
 </html>

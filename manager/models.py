@@ -6,15 +6,23 @@ from cryptography.fernet import Fernet
 import base64
 # Create your models here.
 
+class Websites(models.Model):
+    url = models.URLField(unique=True)
+    user = models.ForeignKey(userProfile, on_delete=models.CASCADE)
+    icon = models.ImageField(upload_to='icons/')
+
+
 
 
 class userData(models.Model):
     
     user = models.ForeignKey(userProfile, on_delete=models.CASCADE)
+    website = models.ForeignKey(Websites, on_delete=models.CASCADE, null=True, blank=True)
     enc_username = models.BinaryField(default=b'')
     enc_email = models.BinaryField(default=b'')
     enc_password = models.BinaryField(default=b'')
     site = models.CharField(max_length=255)
+    url = models.URLField()
     cipher_suite = None
 
     def encyrpt_data(self,data):
@@ -29,6 +37,8 @@ class userData(models.Model):
             self.enc_email = self.encyrpt_data(self.email)
         if self.password:
             self.enc_password = self.encyrpt_data(self.password)
+        
+        self.website = Websites.objects.get(user= self.user,url =self.url)
         super().save(*args, **kwargs)
     
     def read_form(self,username,email,password,request):

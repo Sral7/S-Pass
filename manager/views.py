@@ -1,11 +1,13 @@
 from django.shortcuts import render, get_object_or_404, redirect
-from .models import userData, userProfile
+from .models import userData, userProfile, Websites
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth import logout,update_session_auth_hash
 from django.contrib.auth.models import User 
 from django.http import HttpResponseForbidden
 from .forms import dataForm, editForm, editPasscode,editPin
 import hashlib, base64
+from grab_favicon import download_favicon
+from django.core.files import File
 
 # Create your views here.
 @login_required
@@ -16,7 +18,7 @@ def manager_display(request,username):
             user_data = userData.filter_decrypt(request,user=user_profile)
         except userData.DoesNotExist:
             user_data = None   
-        return render(request,'manager/spass.html',{'user_data':user_data, 'username':username})
+        return render(request,'manager/spass.html',{'user_data':user_data,'username':username})
     else:
         return HttpResponseForbidden('Not Authorized')
     
@@ -31,8 +33,20 @@ def add_site(request,username):
             user_data = form.save(commit=False)
             user_data.user = user_profile
             user_data.read_form(form.cleaned_data['username'],form.cleaned_data['email'],form.cleaned_data['password'],request)
-            
+
+            website, created = Websites.objects.get_or_create(user=user_profile, url = user_data.url)
+            website.save()
             user_data.save()
+
+            if created or not website.icon:
+                if user_data.url.startswith("https://") or user_data.url.startswith("http://"):
+                    if user_data.url.startswith("https://"):
+                        user_data.url = user_data.url[len("https://"):]
+                    elif user_data.url.startswith("http://"):
+                        user_data.url = user_data.url[len("http://"):]
+                download_favicon(user_data.url, size=64,path='manager/favicons/')
+                website.icon.save(f'{user_data.site}.png',  File(open('manager/favicons/' + f'{user_data.url}.png', 'rb')),save=True)
+            website.save()
 
             return redirect('password_manager', username= username)
     else:
