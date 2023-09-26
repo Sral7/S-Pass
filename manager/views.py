@@ -76,10 +76,17 @@ def edit_site(request,username,entry_id):
             user_data.save()
             return redirect("password_manager", username = username)
     else:
-        initial_data = user_data.decrypt_entry()
+        initial_data = user_data.decrypt_entry(request)
         form = editForm(initial=initial_data)
+        context = {'form':form,'username':username,'entry_id':entry_id}
 
-    return render(request, "manager/edit_site.html", {'form':form})  
+    return render(request, "manager/edit_site.html", context)
+
+@login_required
+def delete_site(request,username,entry_id):
+    user_data = userData.objects.get(pk = entry_id)
+    user_data.delete()
+    return redirect("password_manager", username = username)
 
 @login_required
 def change_pass(request,username):

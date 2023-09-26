@@ -47,7 +47,8 @@ class userData(models.Model):
         self.password = password
         self.cipher_suite = Fernet(base64.urlsafe_b64encode(base64.b64decode(request.session['KDFP'])))
     
-    def decrypt_entry(self):
+    def decrypt_entry(self,request):
+        self.cipher_suite = Fernet(base64.urlsafe_b64encode(base64.b64decode(request.session['KDFP'])))
         if self.cipher_suite:
             dec_email = self.decrypt_data(self.enc_email)
             dec_username= self.decrypt_data(self.enc_username)
