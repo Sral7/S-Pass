@@ -39,12 +39,8 @@ def add_site(request,username):
             user_data.save()
 
             if created or not website.icon:
-                if user_data.url.startswith("https://") or user_data.url.startswith("http://"):
-                    if user_data.url.startswith("https://"):
-                        user_data.url = user_data.url[len("https://"):]
-                    elif user_data.url.startswith("http://"):
-                        user_data.url = user_data.url[len("http://"):]
-                download_favicon(user_data.url, size=64,path='manager/favicons/')
+                user_data.url= user_data.url.split("//")[-1].split("/")[0]
+                download_favicon(user_data.url, size=64,path='manager/favicons/',silent=True)
                 website.icon.save(f'{user_data.site}.png',  File(open('manager/favicons/' + f'{user_data.url}.png', 'rb')),save=True)
             website.save()
 
