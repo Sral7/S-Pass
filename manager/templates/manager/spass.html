@@ -5,49 +5,62 @@
         <link rel="stylesheet" href="{% static 'css/manager_style.css' %}">
     </head>
     <body>
+        <div class="container">
+            <div class="sidebar">
+                <header>{{username}}'s Password Manager</header>
+                <div class="sidebar-info">
+                    <ul>
+                        <li><a class="sidebar-data" href="#">Sites</a></li>
+                        <li><a class="sidebar-data" href="#">Generate Passwords</a></li>
+                        <li><a class="sidebar-data" href="#">Security</a></li>
 
-        <div class="sidebar">
-            <p>sidebar settings</p>
-        </div>
-        <div class="content">
-            <header class="manager_bar">
-                <div class="logo">
-                    <img src="{% static 'images/logo.png' %}" alt="Logo" class="logo">
+                    </ul>
                 </div>
-                <nav>
-                    <a href ="{% url 'logout' %}"><button type='button' class="rounded_button">Logout</button></a>
-                    <a href = "{% url 'settings' username %}"> <button type='button' class="rounded_button">Settings</button></a>
-                </nav>
-            </header>
-            <div class="user_data">
-                {% if user_data %}
-                    {%for data in user_data %}
-                        <div class="user_data_item">
 
-                            <div class="item_icon">
-                                <img src="{{data.website.icon.url}}" alt="{{data.site}}" class="icon">
-                                <a href = "{% url 'edit_site' username data.id%}"><button type ='button'  class="data-button">Edit Site</button></a><br>
+            </div>
+            <div class="content">
+                <header class="manager_bar">
+                    <div class="logo">
+                        <img src="{% static 'images/logo.png' %}" alt="Logo" class="logo">
+                    </div>
+                    <nav>
+                        <a href ="{% url 'logout' %}"><button type='button' class="header-button">Logout</button></a>
+                        <a href = "{% url 'settings' username %}"> <button type='button' class="header-button">Settings</button></a>
+                    </nav>
+                </header>
+                <div class="content-container">
+                    <div class="user_data">
+                        {% if user_data %}
+                            {% for data in user_data %}
+                                <div class="user_data_item">
+                                    <div class="item_icon">
+                                        <img src="{{ data.website.icon.url }}" alt="{{ data.site }}" class="icon">
+                                        <a href="{% url 'edit_site' username data.id %}"><button type='button' class="data-button">Edit Site</button></a><br>
+                                    </div>
+                                    <div class="item_data">
+                                        {% if data.username %}
+                                        <label>Username:</label>
+                                        <span>{{ data.username }}</span><br>
+                                        {% endif %}
+                                        {% if data.password %}
+                                        <label>Password:</label>
+                                        <span class="password">{{ data.password }}</span><br>
+                                        {% endif %}
+                                    </div>
+                                </div>
+                            {% endfor %}
+                        {% endif %}
 
-                            </div>
-                            <div class="item_data">
-                                {% if data.username %}
-                                <label>Username:</label>
-                                <span>{{ data.username }}</span><br>
-                                {% endif %}
-                                {% if data.password %}
-                                <label>Password:</label>
-                                <span class="password">{{ data.password }}</span><br>
-                                {% endif %}
-                            </div>
-                        </div>
-                    {% endfor %}
-                {% endif %}
+                    </div>
+                    <div class="buttons">
+                        <a href ="{% url 'add_site' username %}"><button type='button' class="rounded_button">Add Site</button></a>
+                    </div>
+
+                </div>
+                
+
             </div>
-            <div class="buttons">
-                <a href ="{% url 'add_site' username %}"><button type='button' class="rounded_button">Add Site</button></a>
-            </div>
+
         </div>
-
-
     </body>
 </html>

@@ -1,14 +1,17 @@
 <!DOCTYPE html>
 <html>
     <head>
-        <h1>Add Site</h1>
+        <h1>Edit Site</h1>
     </head>
     <body>
         <form method="post">
             {% csrf_token %}
             {{form.as_p}}
             <button type="submit">Edit Site</button>
-            <button>Generate Secure Password</button>
+        </form>
+        <form method="post" action="{% url 'delete_site' username=username entry_id=entry_id %}">
+            {% csrf_token %}
+            <button type="submit">Delete Site</button>
         </form>
     </body>
 </html>
