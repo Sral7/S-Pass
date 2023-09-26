@@ -21,6 +21,7 @@ body{
     gap: 10px;
     margin: 0;
     padding: 0;
+    background-attachment: fixed;
 }
 .content{
     display: flex;
@@ -35,6 +36,7 @@ body{
     max-width: 200px;
     height: 100vh;
     background-color: #38596C;
+    background-attachment: fixed;
 }
 .user_data_item{
     min-width: 225px;
@@ -48,6 +50,34 @@ body{
     background-color: #D9D9D9;
     
 }
+.item_icon{
+    display: flex;
+    align-items: center;
+    margin-bottom: 20px;
+    position: relative;
+}
+.icon{
+    width: 50px;
+    height: 50px;
+}
+
+.data-button{
+    position: absolute;
+    width: 70px;
+    top: 0;
+    left: 70%;
+    border-radius: 10px;
+    border: 0px;
+    background-color: #309EAC;
+    padding: 10px 0px;
+    color: rgba(227,234,231,1);
+
+}
+.data-button:hover, .data-button:focus{
+    outline: none;
+    background-color: #33B8B6
+}
+
 
 .password {
     visibility: hidden;
@@ -55,26 +85,12 @@ body{
 
   }
   
-  .user_data_item:hover .password {
-    visibility: visible;
-    transition: visibility 0.3s ease-out 0s; 
-  }
-
-.user_data_item .rounded_button{
-    width:50%;
-    margin: 10px auto;
-    border-radius: 10px;
-    border: 0px;
-    background-color: #309EAC;
-    padding-top: 5px;
-    padding-bottom: 5px;
-
+.user_data_item:hover .password {
+visibility: visible;
+transition: visibility 0.3s ease-out 0s; 
 }
-.user_data_item .rounded_button:hover,
-.user_data_item .rounded_button:focus{
-    background-color: #E7A90B;
-    outline: none;
-}
+
+
 .user_data_item span{
     color: #0f6698;
 }
@@ -100,7 +116,7 @@ body{
     display: flex;
     flex-wrap: wrap;
 }
-.rounded_button{
+.buttons .rounded_button{
     min-width: 150px;
     margin: 10px 10px;
     border-radius: 10px;
@@ -109,8 +125,17 @@ body{
     padding: 10px 0px;
 
 }
-.rounded_button:hover,.rounded_button:focus{
-    background-color: #E7A90B;
+header .rounded_button{
+    min-width: 150px;
+    margin: 10px 10px;
+    border-radius: 10px;
+    border: 0px;
+    background-color: #309EAC;
+    padding: 10px 0px;
+
+}
+.rounded_button:hover, .rounded_button:focus{
     outline: none;
+    background-color: #33B8B6
 }
 

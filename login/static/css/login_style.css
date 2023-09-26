@@ -26,6 +26,9 @@ header .rounded_button{
     border-radius: 10px;
     border: 0px;
     background-color: rgba(8, 96, 80, 0.30);
+    color: #E3EAE7;
+    font-size: 14px;
+    font-weight: 550;
 }
 
 
@@ -43,13 +46,13 @@ header .rounded_button{
     margin: 50px;
     padding: 25px;
     min-width: 300px;
-    
+    border-radius: 15px;
 }
 
 .login h2{
     margin: 0 auto;
     font-size: 36px;
-    color: #33B8B6;
+    color: #38596C;
 }
 
 
@@ -63,19 +66,21 @@ header .rounded_button{
 .login label{
     font-size: 18px;
     font-weight: bold;
+    color: #38596C;
 
 }
 .form input[type="text"],
 .form input[type ='password']{
     border-radius: 10px;
-    border: 2px solid rgba(8, 96, 80, 0.30);
+    border: 2px solid #38596C;
     padding: 5px 2px;
     flex: 2;
 }
 .form input[type="text"]:focus,
 .form input[type ='password']:focus{
     outline: none;
-    border: 2px solid #E7A90B !important;
+    border: 2px solid #33B8B6;
+    
 
 }
 
@@ -92,11 +97,16 @@ header .rounded_button{
     border-radius: 10px;
     border: 0px;
     background-color: rgba(8, 96, 80, 0.30);
+    color: #38596C;
+    font-size: 14px;
+    font-weight: 550;
 
 }
-.rounded_button:hover{
-    background-color: #E7A90B;
+.rounded_button:hover, .rounded_button:focus{
+    outline: none;
+    background-color: #33B8B6
 }
+
 
 a.create_user_button {
     text-decoration: none; /* Remove the underline */
