@@ -1,0 +1,255 @@
+<!DOCTYPE html>
+{% load static %}
+<html>
+    <head>
+        <link rel="stylesheet" href ="{% static 'css/gen_pass.css' %}">
+    </head>
+    <body>
+        <div class="header">
+            <img src="{% static 'images/logo.png' %}" alt="Logo" class="logo-img">
+        </div>
+        <div class="form">
+            <div class="output">
+                <input type="text" id="output" value="{{password}}" readonly>
+            </div>
+            <div class="sliders">
+                <div class="length-box">
+                    <span id="length-value">8</span>
+                </div>
+                <input type="range" id="length" name="length" min="6" max="30" value="8" oninput="updateLength(this.value)">
+                <div class="read-box">
+                    <span id="read-value">1</span>
+                </div>
+                <input type="range" id="readable" name="readable" min="1" max="3" value="1" oninput="updateReadable(this.value)">
+            </div>
+            <div class="gen-settings">
+                <div class="char-settings">
+                    <div class="gen-settings-item">
+                        <input type="checkbox" id="uppercase" name="uppercase" checked>
+                        <label for="uppercase">Uppercase</label>
+                    </div>
+                    <div class="gen-settings-item">
+                        <input type="checkbox" id="lowercase" name="lowercase" checked>
+                        <label for="lowercase">Lowercase</label>
+                    </div>
+                    <div class="gen-settings-item">
+                        <input type="checkbox" id="numbers" name="numbers" >
+                        <label for="numbers">Numbers</label>
+                    </div>
+                    <div class="gen-settings-item">
+                        <input type="checkbox" id="symbols" name="symbols" >
+                        <label for="symbols">Symbols</label>
+                    </div>
+                </div>
+                <div class="pass-settings">
+                    <div class="gen-settings-item">
+                        <input type="checkbox" id="separate" name="separate">
+                        <label for="separate">Separate</label>
+                    </div>
+                    <div class="gen-settings-item">
+                        <input type="checkbox" id="words" name="words">
+                        <label for="words">Real Words</label>
+                    </div>
+                </div>
+            </div>
+            <button type="submit" class="rounded_button" onclick="generatePassword(
+                document.getElementById('length').value,
+                document.getElementById('readable').value,
+                document.getElementById('uppercase').checked,
+                document.getElementById('lowercase').checked,
+                document.getElementById('numbers').checked,
+                document.getElementById('symbols').checked,
+                document.getElementById('separate').checked,
+                document.getElementById('words').checked)">Generate Password</button>
+            <button type="button" class="cancel_rounded_button" onclick="history.back()">Cancel</button>
+
+
+        </div>
+        <script>
+            function generatePassword(length, readable, uppercase, lowercase, numbers, symbols, separate, words){
+                let password = '';
+                console.log('HELLO WORLD');
+                if (readable == 3) {
+                    console.log('TESTING 3');
+                    let extra = '';
+                    if (numbers) {
+                    extra += '0123456789'.charAt(Math.floor(Math.random() * 10));
+                    }
+                    if (symbols) {
+                    extra += '!@#$%&*_+-=£€~'.charAt(Math.floor(Math.random() * 17));
+                    }
+                    if (length - extra.length > 5 && (numbers || symbols)) {
+                    let plus = 0;
+                    if (length > 10) {
+                        plus = Math.floor(length / 8);
+                    }
+                    let extras = Math.floor(Math.random() * (Math.ceil(length / 8) + plus - Math.ceil(length / 16) + 1)) + Math.ceil(length / 16);
+                    if (numbers && symbols) {
+                        for (let i = 0; i < extras; i++) {
+                        extra += '0123456789!@#$%&*_+-=£€~'.charAt(Math.floor(Math.random() * 27));
+                        }
+                    } else if (numbers) {
+                        for (let i = 0; i < extras; i++) {
+                        extra += '0123456789'.charAt(Math.floor(Math.random() * 10));
+                        }
+                    } else if (symbols) {
+                        for (let i = 0; i < extras; i++) {
+                        extra += '!@#$%&*_+-=£€~'.charAt(Math.floor(Math.random() * 17));
+                        }
+                    }
+                    console.log(extras);
+                    }
+                    console.log(extra);
+
+                    // Load words from file
+                    let words = [];
+                    let request = new XMLHttpRequest();
+                    request.open('GET', '{% static "files/text1.txt" %}', false);
+                    request.send(null);
+                    if (request.status === 200) {
+                    words = request.responseText.split('\n');
+                    }
+
+                    let word_lists = [[], [], [], [], [], []];
+                    for (let i = 0; i < words.length; i++) {
+                        word_lists[words[i].length - 1].push(words[i]);
+                    }
+
+                    while (password.length < length - extra.length) {
+                    let rem;
+                    if (length - extra.length - password.length < 7) {
+                        rem = length - extra.length - password.length;
+                    } else {
+                        rem = Math.floor(Math.random() * 6) + 1;
+                    }
+                    let word = word_lists[rem - 1][Math.floor(Math.random() * word_lists[rem - 1].length)];
+                    if (uppercase) {
+                        word = word.charAt(0).toUpperCase() + word.slice(1);
+                    }
+                    password += word;
+                    }
+
+                    if (Math.random() < 0.7) {
+                    password += extra;
+                    } else {
+                    password = extra + password;
+                    }
+                    if (!lowercase) {
+                        password = password.toUpperCase();
+                    }
+                    document.getElementById('output').value = password
+                    return password;
+                }
+
+                if (readable < 3) {
+                    let chars = '';
+                    if (uppercase) {
+                    chars += 'U';
+                    password += 'ABCDEFGHIJKLMNOPQRSTUVWXYZ'.charAt(Math.floor(Math.random() * 26));
+                    }
+                    if (lowercase) {
+                    chars += 'L';
+                    password += 'abcdefghijklmnopqrstuvwxyz'.charAt(Math.floor(Math.random() * 26));
+                    }
+                    if (numbers) {
+                    chars += 'N';
+                    password += '0123456789'.charAt(Math.floor(Math.random() * 10));
+                    }
+                    if (symbols) {
+                    chars += 'S';
+                    password += '!@#$%&*_+-=£€~'.charAt(Math.floor(Math.random() * 17));
+                    }
+
+                    for (let i = 0; i < length - chars.length; i++) {
+                    password += chars.charAt(Math.floor(Math.random() * chars.length));
+                    }
+
+                    if (!separate) {
+                    password = password.split('').sort(function() { return 0.5 - Math.random() }).join('');
+                    } else {
+                    if (Math.random() < 0.7) {
+                        password = password.split('').sort(function(a, b) {
+                        if (a === 'U' || a === 'L') {
+                            return -1;
+                        } else if (b === 'U' || b === 'L') {
+                            return 1;
+                        } else if (a === 'N' || a === 'S') {
+                            return 1;
+                        } else if (b === 'N' || b === 'S') {
+                            return -1;
+                        } else {
+                            return 0;
+                        }
+                        }).join('');
+                    } else {
+                        password = password.split('').sort(function(a, b) {
+                        if (a === 'U' || a === 'L') {
+                            return 1;
+                        } else if (b === 'U' || b === 'L') {
+                            return -1;
+                        } else if (a === 'N' || a === 'S') {
+                            return -1;
+                        } else if (b === 'N' || b === 'S') {
+                            return 1;
+                        } else {
+                            return 0;
+                        }
+                        }).join('');
+                    }
+                    }
+
+                    for (let i = 0; i < password.length; i++) {
+                    let char = password.charAt(i);
+                    if (readable === 2) {
+                        let weights = {'E': 14.7, 'T': 9.1, 'A': 10.2, 'O': 8.5, 'I': 8.0, 'N': 6.7, 'S': 6.3, 'R': 6.0, 'H': 4.1, 'D': 4.3, 'L': 4.0, 'U': 3.2, 'C': 2.8, 'M': 1.4, 'F': 2.2, 'Y': 1.0, 'W': 1.4, 'G': 1.5, 'P': 1.2, 'B': 1.5, 'V': 1.0, 'K': 0.5, 'X': 0.2, 'Q': 0.1, 'J': 0.2, 'Z': 0.1};
+                        if (char === 'U') {
+                        password = password.substr(0, i) + r.choices('ABCDEFGHIJKLMNOPQRSTUVWXYZ', {weights: Object.values(weights)})[0] + password.substr(i + 1);
+                        } else if (char === 'L') {
+                        password = password.substr(0, i) + r.choices('abcdefghijklmnopqrstuvwxyz', {weights: Object.values(weights)})[0] + password.substr(i + 1);
+                        }
+                    } else if (char === 'U') {
+                        password = password.substr(0, i) + 'ABCDEFGHIJKLMNOPQRSTUVWXYZ'.charAt(Math.floor(Math.random() * 26)) + password.substr(i + 1);
+                    } else if (char === 'L') {
+                        password = password.substr(0, i) + 'abcdefghijklmnopqrstuvwxyz'.charAt(Math.floor(Math.random() * 26)) + password.substr(i + 1);
+                    } else if (char === 'N') {
+                        password = password.substr(0, i) + '0123456789'.charAt(Math.floor(Math.random() * 10)) + password.substr(i + 1);
+                    } else if (char === 'S') {
+                        password = password.substr(0, i) + '!@#$%&*_+-=£€~'.charAt(Math.floor(Math.random() * 17)) + password.substr(i + 1);
+                    }
+                    }
+
+                    document.getElementById('output').value = password
+                    return password;
+                }
+                }
+            function updateLength(value) {
+                var lengthBox = document.getElementById("length-value");
+                lengthBox.innerHTML = value;
+
+            }
+            function updateReadable(value){
+                var readbox = document.getElementById("read-value");
+                readbox.innerHTML = value;
+                var separate = document.getElementById("separate");
+                var separateChecked = separate.checked;
+                var words = document.getElementById("words");
+                var wordsChecked = words.checked;
+                
+                if (value >= 3){
+                    words.checked = true;
+                    words.disabled = true;
+                    separate.checked = true;
+                    separate.disabled = true;
+                } else{
+                    words.disabled = false;
+                    words.checked = wordsChecked && (value != 2);
+                    separate.checked = separateChecked && (value != 2);
+                    separate.disabled = false;
+                }
+
+            }
+
+
+        </script>
+    </body>
+</html>

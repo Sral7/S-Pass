@@ -138,7 +138,10 @@ def change_pin(request,username):
         form = editPin(user=request.user)
 
     return render(request, 'manager/edit_pin.html',{'form':form,'username':username})
+def generate_password(request,username):
 
+    
+    return render(request, 'manager/gen_pass.html',{'username':username})
 
 
     

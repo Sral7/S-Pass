@@ -236,4 +236,12 @@ ul a:hover{
     ul a:hover{
         padding-left: 15px;
     }
-}
+    .manager_bar .logo{
+        max-height: 50px;
+    }
+    .header-button{
+        max-width: 40px;
+    }
+
+
+    }
