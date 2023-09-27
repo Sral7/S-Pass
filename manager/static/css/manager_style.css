@@ -45,7 +45,6 @@ body{
     display: flex;
     flex: 1;
     flex-direction: column;
-    margin-left: 200px;
 }
 .content-container {
     display: flex;
@@ -65,18 +64,18 @@ body{
     min-height: 100vh;
 }
 .sidebar{
-    height: 100%;
-    flex: 0 0 auto;
     max-width: 200px;
-    min-width: 100px;
+    min-width: 200px;
     background-color: #38596C;
     background-attachment: fixed;
     display: flex;
     flex-direction: column;
     align-items: center;
     padding-bottom: 50px;
-    position: fixed;
+    position: static;
     top: 0;
+    bottom: 0;
+    overflow-y: visible;
     box-shadow: 2px 4px 8px rgba(0,0,0,0.3);
 
 }
@@ -100,7 +99,7 @@ body{
 }
 ul{
     list-style: none;
-    width: 190px;
+    width: 100%;
     text-align: center;
     text-align: center;
     margin: 0;
@@ -115,11 +114,15 @@ ul a{
     border-bottom: 1px solid rgba(0,0,0,0.3);
     transition: padding-left .2s ease-in;
     transition: box-shadow 0.1s ease-in;
+    padding: 0 35px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
 
 }
 ul a:hover{
-    padding-left: 20px;
-    box-shadow: 1px 2px 4px rgba(2, 226, 255, 0.3);
+    padding-left: 40px;
+    box-shadow: 0px 4px 4px rgba(2, 226, 255, 0.3);
     
 }
 
@@ -200,11 +203,11 @@ ul a:hover{
 }
 
 .buttons{
-    margin-left: auto;
     margin-top: 50px;
 }
 .buttons .rounded_button{
-    min-width: 250px;
+    max-width: 200px;
+    min-width: 100px;
     margin: 10px 10px;
     border-radius: 10px;
     border: 0px;
@@ -222,14 +225,15 @@ ul a:hover{
 }
 
 @media (max-width: 800px) {
-    .content {
-        margin-left: 150px;
-    }
-    .sidebar {
-        min-width: 150px;
+
+    .sidebar{
         max-width: 150px;
+        min-width: 150px;
     }
-    ul{
-        width: 140px;
+    ul a{
+        padding: 0 10px;
+    }
+    ul a:hover{
+        padding-left: 15px;
     }
 }

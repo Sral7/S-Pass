@@ -1,0 +1,77 @@
+body{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    background: rgb(51,184,182);
+    background: linear-gradient(180deg, rgba(51,184,182,1) 0%, rgba(227,234,231,1) 100%);
+    margin: 0;
+    padding: 0;
+    background-attachment: fixed;
+}
+.header{
+    display: flex;
+    width: 100%;
+
+}
+.header img{
+    margin: 20px;
+    height: 100px;    
+}
+h2{
+    text-transform: capitalize;
+    text-align: center;
+    font-size: 30px;
+    color: #38596C;
+    width: 90%;
+    padding-bottom: 5px;
+    border-bottom: 2px solid #38596C; ;
+}
+.form{
+    width: 500px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    background-color: #e3eae7;
+    border-radius: 15px;
+    padding-bottom: 50px;
+}
+
+.user-info{
+    display: flex;
+    align-items: center;
+    width: 100%;
+}
+.user-info h3{
+    width: 200px;
+    text-align: right;
+    font-size: 20px;
+    font-weight: bold;
+    color: #38596C;
+}
+.user-info a{
+    display: inline-block;
+    text-align: center;
+}
+.rounded_button,.cancel_rounded_button{
+    width: 200px;
+    height: 40px;
+    margin: 10px;
+    border-radius: 10px;
+    border: 0px;
+    background-color: rgba(8, 96, 80, 0.30);
+    color: #38596C;
+    font-size: 14px;
+    font-weight: 550;
+    margin-top: 30px;
+    margin-bottom: 20px;
+    box-shadow: 0px 5px 10px rgba(0,0,0,0.25);
+}
+.rounded_button:hover, .rounded_button:focus{
+    background-color: #33B8B6;
+    outline: none;
+}
+.cancel_rounded_button:hover, .cancel_rounded_button:focus{
+    color: #e3eae7;
+    background-color: #db492f;
+    outline: none;
+}

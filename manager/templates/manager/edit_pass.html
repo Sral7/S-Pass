@@ -1,13 +1,19 @@
 <!DOCTYPE html>
+{% load static %}
 <html>
     <head>
-        <h1>{{username}}</h1>
+        <link rel="stylesheet" href="{% static 'css/edit_settings.css' %}">
     </head>
     <body>
-        <form method="post">
+        <div class="header">
+            <img src="{% static 'images/logo.png' %}" alt="Website Logo">
+        </div>
+        <form method="post" class="form">
+            <h2>Change Password</h2>
             {% csrf_token %}
             {{form.as_p}}
-            <button type="submit">Change Passcode</button>
+            <button type="submit" class="rounded_button">Change Passcode</button>
+            <button type="button" class=" cancel_rounded_button" onclick="history.back()">Cancel</button>
         </form>
     </body>
 </html>

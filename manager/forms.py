@@ -18,6 +18,7 @@ class dataForm(forms.ModelForm):
 
 class editForm(forms.Form):
     site = forms.CharField(max_length=255, required=True)
+    url = forms.URLField(required=True)
     dec_username = forms.CharField(max_length=255, required=True,label='Username')
     dec_email = forms.EmailField(required=True,label='Email')
     dec_password = forms.CharField(max_length=255,required=True,label='Password')

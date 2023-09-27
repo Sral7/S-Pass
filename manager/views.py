@@ -34,21 +34,22 @@ def add_site(request,username):
             user_data.user = user_profile
             user_data.read_form(form.cleaned_data['username'],form.cleaned_data['email'],form.cleaned_data['password'],request)
 
-            website, created = Websites.objects.get_or_create(user=user_profile, url = user_data.url)
-            website.save()
+            website, created = Websites.objects.get_or_create(user=user_profile, url=user_data.url)
+            user_data.website = website
             user_data.save()
 
             if created or not website.icon:
                 user_data.url= user_data.url.split("//")[-1].split("/")[0]
                 download_favicon(user_data.url, size=64,path='manager/favicons/',silent=True)
                 website.icon.save(f'{user_data.site}.png',  File(open('manager/favicons/' + f'{user_data.url}.png', 'rb')),save=True)
-            website.save()
+                user_data.url = "https://" + user_data.url
+                website.url = user_data.url
+                website.save()
+                user_data.save()
 
-            return redirect('password_manager', username= username)
+            return redirect('password_manager', username=username)
     else:
         form = dataForm()
-
-
 
     return render(request, 'manager/add_site.html',{'form':form})
 
@@ -69,6 +70,7 @@ def edit_site(request,username,entry_id):
         if form.is_valid():
             user_data.read_form(form.cleaned_data['dec_username'],form.cleaned_data['dec_email'],form.cleaned_data['dec_password'],request)
             user_data.site = form.cleaned_data['site']
+            user_data.url = form.cleaned_data['url']
             user_data.save()
             return redirect("password_manager", username = username)
     else:

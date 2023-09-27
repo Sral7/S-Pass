@@ -7,7 +7,7 @@ import base64
 # Create your models here.
 
 class Websites(models.Model):
-    url = models.URLField(unique=True)
+    url = models.URLField()
     user = models.ForeignKey(userProfile, on_delete=models.CASCADE)
     icon = models.ImageField(upload_to='icons/')
 
@@ -53,7 +53,7 @@ class userData(models.Model):
             dec_email = self.decrypt_data(self.enc_email)
             dec_username= self.decrypt_data(self.enc_username)
             dec_password = self.decrypt_data(self.enc_password)
-        return {'site': self.site, 'dec_username':dec_username, 'dec_email':dec_email, 'dec_password':dec_password}
+        return {'site': self.site, 'url':self.url, 'dec_username':dec_username, 'dec_email':dec_email, 'dec_password':dec_password}
     
     @classmethod
     def filter_decrypt(cls,request,**kwargs):

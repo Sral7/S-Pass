@@ -1,15 +1,26 @@
 <!DOCTYPE html>
+{% load static %}
 <html>
     <head>
-        <h1>User Setttings</h1>
+        <link rel="stylesheet" href="{% static 'css/settings.css' %}">
     </head>
     <body>
-        <h2>{{username}}</h2>
+        <div class="header">
+            <img src="{% static 'images/logo.png' %}" alt="Website Logo">
+        </div>
+        <div class="form">
+            <h2><span style="text-transform: capitalize;">{{username}}</span><span style="text-transform: lowercase;">'s</span> User Settings</h2>
 
-        <h3>Change Password</h3>
-        <a href="{% url 'change_passcode' username %}"><button type="button">Change Password</button></a>
+            <div class="user-info">
+                <h3>Change Password:</h3>
+                <a href="{% url 'change_passcode' username %}"><button type="button" class="rounded_button">Change Password</button></a>
+            </div>
+            <div class="user-info">
+                <h3>Change Pin:</h3>
+                <a href = "{% url 'change_pin' username%}"><button type="button" class="rounded_button">Change Pin</button></a>
+            </div>
+            <button type="button" class="cancel_rounded_button" onclick="history.back()">Cancel</button>
 
-        <h3>Change Pin</h3>
-        <a href = "{% url 'change_pin' username%}"><button type="button">Change Pin</button></a>
+        </div>
     </body>
 </html>

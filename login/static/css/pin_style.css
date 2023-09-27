@@ -31,7 +31,7 @@ header .logo-img{
     justify-content: center;
     background-color: #E3EAE7;
     border-radius: 15px;
-    height: 300px;
+    height: 350px;
     padding: 10px;
 }
 
@@ -72,9 +72,9 @@ input:focus{
 }
 
 
-.buttons .rounded_button{
+.rounded_button, .cancel_rounded_button{
     width: 200px;
-    height: 40px;
+    height: 30px;
     margin: 10px;
     border-radius: 10px;
     border: 0px;
@@ -83,12 +83,14 @@ input:focus{
     font-size: 14px;
     font-weight: 550;
 
+    box-shadow: 0px 5px 10px rgba(0,0,0,0.25);
 }
-.rounded_button:hover{
-    background-color: #33B8B6;
-}
-.rounded_button:focus{
+.rounded_button:hover, .rounded_button:focus{
     background-color: #33B8B6;
     outline: none;
-
+}
+.cancel_rounded_button:hover, .cancel_rounded_button:focus{
+    color: #e3eae7;
+    background-color: #db492f;
+    outline: none;
 }

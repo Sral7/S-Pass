@@ -1,14 +1,19 @@
 <!DOCTYPE html>
+{% load static %}
 <html>
     <head>
-        <h1>Add Site</h1>
+        <link rel="stylesheet" href="{% static 'css/add_site.css' %}">
     </head>
     <body>
+        <div class="header">
+            <img src="{% static 'images/logo.png' %}" alt="Website Logo">
+        </div>
         <form method="post">
+            <h1>Add Site</h1>
             {% csrf_token %}
             {{form.as_p}}
-            <button type="submit">Add Site</button>
-            <button>Generate Secure Password</button>
+            <button type="submit" class="rounded_button">Add Site</button>
+            <button type="button" class="cancel_rounded_button" onclick="history.back()">Cancel</button>
         </form>
     </body>
 </html>
