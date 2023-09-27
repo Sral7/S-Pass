@@ -9,7 +9,7 @@ encrypt and decrypt the data added to S-Pass. If any security flaws or issues pr
 3.Install pipenv using pip by running the command pip install pipenv.
 4.Create a new virtual environment for the project using pipenv by running the command pipenv install. This will create a new virtual environment and install all the required packages specified in the Pipfile.lock file.
 5.Activate the virtual environment by running the command pipenv shell.
-6.Create a new file named .env in the project folder and add the following lines to it:
+6.Create a new file named .env in the project folder and add the following lines to it: SECRET_KEY=<your-secret-key>, DEBUG=True
 7.Replace <your-secret-key> with a secret key of your choice. 7. Run the Django migrations using the command python manage.py migrate. 
 8. Create a superuser account using the command python manage.py createsuperuser and follow the prompts to enter your desired username, email, and password. 
 9. Run the development server using the command python manage.py runserver. 
