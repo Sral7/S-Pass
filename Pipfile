@@ -11,6 +11,7 @@ django-encrypted-model-fields = "*"
 pycryptodome = "*"
 pillow = "*"
 grab-favicon = "*"
+gunicorn = "*"
 
 [dev-packages]
 
