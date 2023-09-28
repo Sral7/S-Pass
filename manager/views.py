@@ -1,8 +1,9 @@
 from django.shortcuts import render, get_object_or_404, redirect
-from .models import userData, userProfile, Websites
+from .models import userData, userProfile, Websites, genSettings
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth import logout,update_session_auth_hash
-from django.contrib.auth.models import User 
+from django.contrib.auth.models import User
+from django.forms.models import model_to_dict
 from django.http import HttpResponseForbidden
 from .forms import dataForm, editForm, editPasscode,editPin
 import hashlib, base64
@@ -33,13 +34,14 @@ def add_site(request,username):
             user_data = form.save(commit=False)
             user_data.user = user_profile
             user_data.read_form(form.cleaned_data['username'],form.cleaned_data['email'],form.cleaned_data['password'],request)
-
+            user_data.url= user_data.url.split("//")[-1].split("/")[0]
+            user_data.url = "https://" + user_data.url
             website, created = Websites.objects.get_or_create(user=user_profile, url=user_data.url)
             user_data.website = website
             user_data.save()
 
             if created or not website.icon:
-                user_data.url= user_data.url.split("//")[-1].split("/")[0]
+                user_data.url = user_data.url.split("//")[-1].split("/")[0]
                 download_favicon(user_data.url, size=64,path='manager/favicons/',silent=True)
                 website.icon.save(f'{user_data.site}.png',  File(open('manager/favicons/' + f'{user_data.url}.png', 'rb')),save=True)
                 user_data.url = "https://" + user_data.url
@@ -50,8 +52,12 @@ def add_site(request,username):
             return redirect('password_manager', username=username)
     else:
         form = dataForm()
+        user_profile = userProfile.objects.get(user=username)
+        gen_settings = genSettings.objects.get(user=user_profile)
+        context = model_to_dict(gen_settings)
+        context['form'] = form
 
-    return render(request, 'manager/add_site.html',{'form':form})
+    return render(request, 'manager/add_site.html',context)
 
 @login_required
 def logout_manager(request):
@@ -76,7 +82,15 @@ def edit_site(request,username,entry_id):
     else:
         initial_data = user_data.decrypt_entry(request)
         form = editForm(initial=initial_data)
-        context = {'form':form,'username':username,'entry_id':entry_id}
+        user_profile = userProfile.objects.get(user=username)
+        gen_settings = genSettings.objects.get(user=user_profile)
+        context = {
+            'form': form,
+            'username': username,
+            'entry_id': entry_id,
+            **model_to_dict(gen_settings)
+        }
+
 
     return render(request, "manager/edit_site.html", context)
 
@@ -138,11 +152,44 @@ def change_pin(request,username):
         form = editPin(user=request.user)
 
     return render(request, 'manager/edit_pin.html',{'form':form,'username':username})
+
 def generate_password(request,username):
+    user_profile = userProfile.objects.get(user=username)
+    gen_settings = genSettings.objects.get(user=user_profile)
+    context = model_to_dict(gen_settings)
+    context['username'] = username
+    print(context)
+    print(f"uppercase: {context['uppercase']}")
 
+
+    return render(request, 'manager/gen_pass.html',context)
+
+def gen_settings(request,username):
+    user_profile = userProfile.objects.get(user=username)
+    gen_settings = genSettings.objects.get(user=user_profile)
+    context = model_to_dict(gen_settings)
+    context['username'] = username
+
+    return render(request, 'manager/gen_settings.html', context)
+
+
+def save_settings(request,username):
+    print(request.method,'save')
+    if request.method =='POST':
+        user_profile = userProfile.objects.get(user=username)
+        gen_settings = genSettings.objects.get(user = user_profile)
+        gen_settings.length = request.POST.get('length')
+        gen_settings.readable = request.POST.get('readable')
+        gen_settings.uppercase = bool(request.POST.get('uppercase'))
+        gen_settings.lowercase = bool(request.POST.get('lowercase'))
+        gen_settings.numbers = bool(request.POST.get('numbers'))
+        gen_settings.symbols = bool(request.POST.get('symbols'))
+        gen_settings.separate = bool(request.POST.get('separate'))
+        gen_settings.words = bool(request.POST.get('words'))
+        gen_settings.save()
     
-    return render(request, 'manager/gen_pass.html',{'username':username})
 
+    return redirect('password_manager',username = username)
 
     
         

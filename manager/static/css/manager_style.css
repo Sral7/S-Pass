@@ -5,7 +5,7 @@
     justify-content: space-between;
     height: 100px;
     position: sticky;
-    background-color: rgba(84,194,192,1);
+    background-color: #4eb1b0;
     top: 0;
     z-index: 1;
     box-shadow: 2px 4px 8px rgba(0,0,0,0.3);
@@ -35,8 +35,7 @@
 
 
 body{
-    background: rgb(51,184,182);
-    background: linear-gradient(180deg, rgba(51,184,182,1) 0%, rgba(227,234,231,1) 26%);
+    background-color: #E3EAE7;
     margin: 0;
     padding: 0;
     background-attachment: fixed;
@@ -64,15 +63,17 @@ body{
     min-height: 100vh;
 }
 .sidebar{
+    height: 95vh;
     max-width: 200px;
     min-width: 200px;
-    background-color: #38596C;
+    background-color: #08415C;
     background-attachment: fixed;
     display: flex;
     flex-direction: column;
     align-items: center;
+    justify-content: space-between;
     padding-bottom: 50px;
-    position: static;
+    position: sticky;
     top: 0;
     bottom: 0;
     overflow-y: visible;
@@ -97,6 +98,14 @@ body{
     align-items: center;
     line-height: 50px;
 }
+.sidebar-settings{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    line-height: 50px;
+    width: 100%;
+}
+
 ul{
     list-style: none;
     width: 100%;
@@ -241,6 +250,11 @@ ul a:hover{
     }
     .header-button{
         max-width: 40px;
+        margin-right: 50px;
+    }
+    .sidebar-info, .sidebar-settings{
+        line-height: 25px;
+    
     }
 
 

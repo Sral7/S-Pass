@@ -7,7 +7,7 @@ from django.contrib.auth.views import LoginView
 from django.contrib.auth import login,logout
 from .forms import CreateUser, PinForm
 from .models import userProfile
-from manager.models import userData
+from manager.models import userData,genSettings
 from django.contrib.auth.decorators import login_required
 
 # Create your views here.
@@ -40,6 +40,7 @@ def register(request):
         if form.is_valid():
             username = form.cleaned_data.get('username')
             user_profile = userProfile.objects.create(user=username)
+            genSettings.objects.create(user=user_profile)
             user = form.save(commit=False)
             user.save()
 
@@ -47,12 +48,13 @@ def register(request):
             login(request,user)
             request.session['key'] = key
             request.session.save()
-
             create_pin_url = reverse('create_pin', args=[username])
+
             return redirect(create_pin_url)    
     else:
         form = CreateUser()
     return render(request, 'login/create_user.html',{'form':form})
+
 @login_required
 def create_pin(request,username):
     if request.method =='POST':

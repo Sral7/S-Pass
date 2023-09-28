@@ -10,7 +10,7 @@ class dataForm(forms.ModelForm):
 
     username = forms.CharField(max_length=255, required=True)
     email = forms.EmailField(required=True)
-    password = forms.CharField(max_length=255, required=True, widget=forms.PasswordInput)
+    password = forms.CharField(max_length=255, required=True, widget=forms.TextInput(attrs={'id':'output'}))
 
     class Meta:
         model = userData
@@ -21,7 +21,7 @@ class editForm(forms.Form):
     url = forms.URLField(required=True)
     dec_username = forms.CharField(max_length=255, required=True,label='Username')
     dec_email = forms.EmailField(required=True,label='Email')
-    dec_password = forms.CharField(max_length=255,required=True,label='Password')
+    dec_password = forms.CharField(max_length=255,required=True,label='Password', widget=forms.TextInput(attrs={'id':'output'}))
 
 class editPasscode(forms.Form):
 

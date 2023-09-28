@@ -6,6 +6,19 @@ from cryptography.fernet import Fernet
 import base64
 # Create your models here.
 
+class genSettings(models.Model):
+    user = models.OneToOneField(userProfile, on_delete=models.CASCADE)
+    length = models.IntegerField(default=8)
+    readable = models.IntegerField(default=1)
+    uppercase = models.BooleanField(default=True)
+    lowercase = models.BooleanField(default=True)
+    numbers = models.BooleanField(default=False)
+    symbols = models.BooleanField(default=False)
+    separate = models.BooleanField(default=False)
+    words = models.BooleanField(default=False)
+
+
+
 class Websites(models.Model):
     url = models.URLField()
     user = models.ForeignKey(userProfile, on_delete=models.CASCADE)

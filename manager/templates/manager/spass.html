@@ -7,13 +7,19 @@
     <body>
         <div class="container">
             <div class="sidebar">
-                <header>{{username}}'s Password Manager</header>
                 <div class="sidebar-info">
+                    <header>{{username}}'s Password Manager</header>
                     <ul>
                         <li><a class="sidebar-data" href="#">Sites</a></li>
                         <li><a class="sidebar-data" href="{% url 'generate_password' username %}">Generate Password</a></li>
                         <li><a class="sidebar-data" href="#">Security</a></li>
 
+                    </ul>
+                </div>
+                <div class="sidebar-settings">
+                    <ul>
+                        <li><a class="sidebar-data" href="{% url 'settings' username %}">Settings</a></li>
+                        <li><a class="sidebar-data" href="{% url 'logout' %}">Logout</a></li>
                     </ul>
                 </div>
 

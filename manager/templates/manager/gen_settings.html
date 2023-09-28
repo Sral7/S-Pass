@@ -8,7 +8,7 @@
         <div class="header">
             <img src="{% static 'images/logo.png' %}" alt="Logo" class="logo-img">
         </div>
-        <form class="form" method="POST">
+        <form class="form" method="POST" action="{% url 'save_settings' username=username %}">
             {% csrf_token %}
             <div class="output">
                 <input type="text" id="output" value="{{password}}" readonly>
@@ -30,25 +30,25 @@
                         <label for="uppercase">Uppercase</label>
                     </div>
                     <div class="gen-settings-item">
-                        <input type="checkbox" id="lowercase" name="lowercase" {% if lowercase %} checked {% endif %}>
+                        <input type="checkbox" id="lowercase" name="lowercase" {% if lowercase %}checked{% endif %}>
                         <label for="lowercase">Lowercase</label>
                     </div>
                     <div class="gen-settings-item">
-                        <input type="checkbox" id="numbers" name="numbers" {% if numbers %}checked {% endif %}>
+                        <input type="checkbox" id="numbers" name="numbers" {% if numbers %}checked{% endif %}>
                         <label for="numbers">Numbers</label>
                     </div>
                     <div class="gen-settings-item">
-                        <input type="checkbox" id="symbols" name="symbols" {% if symbols %}checked {% endif %}>
+                        <input type="checkbox" id="symbols" name="symbols" {% if symbols %}checked{% endif %}>
                         <label for="symbols">Symbols</label>
                     </div>
                 </div>
                 <div class="pass-settings">
                     <div class="gen-settings-item">
-                        <input type="checkbox" id="separate" name="separate"{% if separate %}checked {% endif %}>
+                        <input type="checkbox" id="separate" name="separate"{% if separate %}checked{% endif %}>
                         <label for="separate">Separate</label>
                     </div>
                     <div class="gen-settings-item">
-                        <input type="checkbox" id="words" name="words"{% if words %}checked {% endif %}>
+                        <input type="checkbox" id="words" name="words"{% if words %}checked{% endif %}>
                         <label for="words">Real Words</label>
                     </div>
                 </div>
@@ -62,14 +62,16 @@
                 document.getElementById('symbols').checked,
                 document.getElementById('separate').checked,
                 document.getElementById('words').checked)">Generate Password</button>
+            
+            <button type="submit" class="rounded_button">Save Settings</button>
             <button type="button" class="cancel_rounded_button" onclick="history.back()">Cancel</button>
-
 
         </form>
         <script>
             const TEXT1_URL = "{% static 'images/text1.txt' %}";
         </script>
         <script src="{% static 'js/gen_pass.js' %}"></script>
+
         <script>
            
             function updateLength(value) {

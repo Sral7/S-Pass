@@ -12,8 +12,24 @@
             <h1>Add Site</h1>
             {% csrf_token %}
             {{form.as_p}}
+            
             <button type="submit" class="rounded_button">Add Site</button>
+            <button type="button" class="rounded_button" onclick="generatePassword(
+                '{{ length }}',
+                '{{ readable }}',   
+                '{{ uppercase }}',
+                '{{ lowercase }}',
+                '{{ numbers }}',
+                '{{ symbols }}',
+                '{{ separate }}',
+                '{{ words }}'
+            )">Generate Password</button>
+
             <button type="button" class="cancel_rounded_button" onclick="history.back()">Cancel</button>
+            <script>
+                const TEXT1_URL = "{% static 'images/text1.txt' %}";
+            </script>
+            <script src="{% static 'js/gen_pass.js' %}"></script>
         </form>
     </body>
 </html>

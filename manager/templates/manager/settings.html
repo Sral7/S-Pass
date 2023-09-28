@@ -19,6 +19,11 @@
                 <h3>Change Pin:</h3>
                 <a href = "{% url 'change_pin' username%}"><button type="button" class="rounded_button">Change Pin</button></a>
             </div>
+            <div class="user-info">
+                <h3 class="long">Generate Password Settings:</h3>
+                <a href = "{% url 'pass_generator_settings' username%}"><button type="button" class="rounded_button">Settings</button></a>
+            </div>
+
             <button type="button" class="cancel_rounded_button" onclick="history.back()">Cancel</button>
 
         </div>

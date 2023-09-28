@@ -14,8 +14,21 @@
                 {% csrf_token %}
                 {{form.as_p}}
                 <button type="submit" class="rounded_button">Confirm</button>
+                <button type="button" class="rounded_button" onclick="generatePassword(
+                    '{{ length }}',
+                    '{{ readable }}',   
+                    '{{ uppercase }}',
+                    '{{ lowercase }}',
+                    '{{ numbers }}',
+                    '{{ symbols }}',
+                    '{{ separate }}',
+                    '{{ words }}'
+                )">Generate New Password</button>
                 <button type="button" class="cancel_rounded_button" onclick="history.back()">Cancel</button>
-
+                <script>
+                    const TEXT1_URL = "{% static 'images/text1.txt' %}";
+                </script>
+                <script src="{% static 'js/gen_pass.js' %}"></script>
             </form>
             <form method="post" action="{% url 'delete_site' username=username entry_id=entry_id %}" class="delete" onsubmit="return confirm('All Data Pertaining To This Site Will Be Deleted. Are You Sure You Want To Continue?')">
                 {% csrf_token %}
