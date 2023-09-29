@@ -41,7 +41,7 @@ class userData(models.Model):
     def encyrpt_data(self,data):
         return self.cipher_suite.encrypt(data.encode())
     def decrypt_data(self,data):
-        return self.cipher_suite.decrypt(data).decode() 
+        return self.cipher_suite.decrypt(data.encode()).decode() 
     
     def save(self, *args, **kwargs):
         if self.username:

@@ -13,6 +13,10 @@ https://docs.djangoproject.com/en/4.2/ref/settings/
 import os
 from pathlib import Path
 from django.core.management.utils import get_random_secret_key
+import django_heroku 
+import dj_database_url
+from decouple import config
+
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -25,9 +29,9 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 SECRET_KEY = os.getenv("DJANGO_SECRET_KEY", get_random_secret_key())
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = os.getenv("DEBUG", "False") == "True"
+DEBUG = True
 
-ALLOWED_HOSTS = ['.vercel.app']
+ALLOWED_HOSTS = ['*']
 
 
 # Application definition
@@ -38,17 +42,16 @@ INSTALLED_APPS = [
     'django.contrib.contenttypes',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'debug_toolbar',
     'django.contrib.sessions',
     'login',
     'manager',
     'cryptography',
+    'django_heroku',
+    'whitenoise.runserver_nostatic',
 ]
 
 # settings.py
-LOGIN_URL = 'login'
-LOGIN_REDIRECT_URL = 'password_manager'
-
+SECURE_SSL_REDIRECT = True
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
@@ -59,13 +62,24 @@ MIDDLEWARE = [
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
     "debug_toolbar.middleware.DebugToolbarMiddleware",
-]
+    "whitenoise.middleware.WhiteNoiseMiddleware",
 
-SESSION_ENGINE = 'django.contrib.sessions.backends.db'
+]
+if DEBUG is True:
+   INSTALLED_APPS += (
+       'debug_toolbar',
+       )
+
+if DEBUG is True:
+  class AllIPS(list):
+      def __contains__(self, item):
+           return True
+  INTERNAL_IPS = AllIPS()
+
+SESSION_ENGINE = 'django.contrib.sessions.backends.cached_db'
 SESSION_COOKIE_NAME = 'my_session'  
 SESSION_SAVE_EVERY_REQUEST = True  
 SESSION_EXPIRE_AT_BROWSER_CLOSE = True 
-SESSION_KEY = b'default'
 SESSION_COOKIE_AGE = 3600  
 
 
@@ -101,13 +115,23 @@ WSGI_APPLICATION = 'spass.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/4.2/ref/settings/#databases
 
+
+
 DATABASES = {
+
+
     'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',
+        'ENGINE': 'django.db.backends.postgresql_psycopg2',
+        'NAME': 'd459ru0k9b2pa7', 
+        'USER': 'hybbxgrfphvxxf',  
+        'PASSWORD': 'bdeac9fd043969e8d69b93c6614603eabe9dbcf579dadc10f85fc8dbecce4ba6',  
+        'HOST': 'ec2-3-210-173-88.compute-1.amazonaws.com',
+        'PORT': '',
+        'URI': 'postgres://hybbxgrfphvxxf:bdeac9fd043969e8d69b93c6614603eabe9dbcf579dadc10f85fc8dbecce4ba6@ec2-3-210-173-88.compute-1.amazonaws.com:5432/d459ru0k9b2pa7',
+        'HEROUKU CLI': 'heroku pg:psql postgresql-aerodynamic-15507 --app spass'
     }
 }
-
+DATABASES['default'] = dj_database_url.config(conn_max_age=600, ssl_require=True)
 
 # Password validation
 # https://docs.djangoproject.com/en/4.2/ref/settings/#auth-password-validators
@@ -126,8 +150,6 @@ AUTH_PASSWORD_VALIDATORS = [
         'NAME': 'django.contrib.auth.password_validation.NumericPasswordValidator',
     },
 ]
-
-
 # Internationalization
 # https://docs.djangoproject.com/en/4.2/topics/i18n/
 
@@ -152,7 +174,7 @@ STATIC_URL = 'static/'
 MEDIA_URL = '/media/'
 MEDIA_ROOT = os.path.join(BASE_DIR,'media')
 
-
+STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/4.2/ref/settings/#default-auto-field
@@ -162,5 +184,7 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 AUTHENTICATION_BACKENDS = [
     'django.contrib.auth.backends.ModelBackend',
 ]
+
+django_heroku.settings(locals())
 
 

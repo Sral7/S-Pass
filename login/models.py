@@ -17,11 +17,11 @@ class userProfile(models.Model):
 
     
     def hash_pin(self,pin):
-        salted_pin = self.salt + pin.encode()
+        salted_pin = bytes(self.salt) + pin.encode()
         self.hashed_pin = make_password(salted_pin)
 
     def check_pin(self,pin):
-        salted_pin = self.salt + pin.encode()
+        salted_pin = bytes(self.salt) + pin.encode()
         return check_password(salted_pin,self.hashed_pin)
     
     def __str__(self) -> str:
