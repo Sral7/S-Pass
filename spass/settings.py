@@ -129,7 +129,8 @@ DATABASES = {
         'PORT': '5432',
     }
 }
-
+# settings.py
+LOGIN_REDIRECT_URL = None
 
 # Password validation
 # https://docs.djangoproject.com/en/4.2/ref/settings/#auth-password-validators
