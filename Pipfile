@@ -12,6 +12,7 @@ pycryptodome = "*"
 pillow = "*"
 grab-favicon = "*"
 django-heroku = "*"
+python-decouple = "*"
 
 [dev-packages]
 
