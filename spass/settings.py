@@ -130,6 +130,7 @@ DATABASES = {
     }
 }
 # settings.py
+LOGIN_URL = None
 LOGIN_REDIRECT_URL = None
 
 # Password validation
