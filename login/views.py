@@ -24,7 +24,7 @@ class LoginScreen(LoginView):
         login(self.request,user)
 
         user_profile = userProfile.objects.get(user=user)
-        key = base64.b64encode(hashlib.pbkdf2_hmac('sha512',form.cleaned_data.get('password').encode(),user_profile.salt, iterations=1000, dklen=64)).decode()
+        key = base64.b64encode(hashlib.pbkdf2_hmac('sha512',form.cleaned_data.get('password').encode(),bytes(user_profile.salt), iterations=1000, dklen=64)).decode()
         self.request.session['key'] = key
         self.request.session.save()
 
@@ -44,7 +44,7 @@ def register(request):
             user = form.save(commit=False)
             user.save()
 
-            key = base64.b64encode(hashlib.pbkdf2_hmac('sha512',form.cleaned_data.get('password1').encode(),user_profile.salt, iterations=1000, dklen=64)).decode()
+            key = base64.b64encode(hashlib.pbkdf2_hmac('sha512',form.cleaned_data.get('password1').encode(),bytes(user_profile.salt), iterations=1000, dklen=64)).decode()
             login(request,user)
             request.session['key'] = key
             request.session.save()
@@ -63,7 +63,7 @@ def create_pin(request,username):
             pin = form.cleaned_data.get('pin')
             user_profile = userProfile.objects.get(user = username)
 
-            request.session['KDFP'] = base64.b64encode(hashlib.pbkdf2_hmac('sha512', user_profile.salt + pin.encode() + user_profile.salt + base64.b64decode(request.session['key'].encode()),user_profile.salt,iterations=1000, dklen=32)).decode()
+            request.session['KDFP'] = base64.b64encode(hashlib.pbkdf2_hmac('sha512', bytes(user_profile.salt) + pin.encode() + bytes(user_profile.salt) + base64.b64decode(request.session['key'].encode()),bytes(user_profile.salt),iterations=1000, dklen=32)).decode()
             del request.session['key']
 
             manager_url = reverse('password_manager', args =[username])
@@ -84,7 +84,7 @@ def enter_pin(request,username):
             manager_url = reverse('password_manager', args =[username])
 
             if user_profile.check_pin(pin = pin):
-                key = hashlib.pbkdf2_hmac('sha512',  user_profile.salt + pin.encode() +  user_profile.salt + base64.b64decode(request.session['key'].encode()),user_profile.salt,iterations=1000, dklen=32)
+                key = hashlib.pbkdf2_hmac('sha512',  bytes(user_profile.salt) + pin.encode() +  bytes(user_profile.salt) + base64.b64decode(request.session['key'].encode()),bytes(user_profile.salt),iterations=1000, dklen=32)
                 del request.session['key']
 
                 request.session['KDFP'] = base64.b64encode(key).decode()

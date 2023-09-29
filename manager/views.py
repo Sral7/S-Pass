@@ -113,8 +113,8 @@ def change_pass(request,username):
             update_session_auth_hash(request,user)
 
             user_data = userData.filter_decrypt(request, user = user_profile)
-            new_hash = base64.b64encode(hashlib.pbkdf2_hmac('sha512',form.cleaned_data['new_password1'].encode(),user_profile.salt, iterations=1000, dklen=64)).decode()
-            request.session['KDFP'] =  base64.b64encode(hashlib.pbkdf2_hmac('sha512',  user_profile.salt + form.cleaned_data['pin'].encode() +  user_profile.salt + base64.b64decode(new_hash),user_profile.salt,iterations=1000, dklen=32)).decode()  
+            new_hash = base64.b64encode(hashlib.pbkdf2_hmac('sha512',form.cleaned_data['new_password1'].encode(),bytes(user_profile.salt), iterations=1000, dklen=64)).decode()
+            request.session['KDFP'] =  base64.b64encode(hashlib.pbkdf2_hmac('sha512',  bytes(user_profile.salt) + form.cleaned_data['pin'].encode() +  bytes(user_profile.salt) + base64.b64decode(new_hash),bytes(user_profile.salt),iterations=1000, dklen=32)).decode()  
             for data in user_data:
                 data.read_form(data.username, data.email,data.password,request)
                 data.save()
@@ -139,8 +139,8 @@ def change_pin(request,username):
             user_data = userData.filter_decrypt(request, user = user_profile)
             user_profile.hash_pin(pin)
             user_profile.save()
-            new_hash = base64.b64encode(hashlib.pbkdf2_hmac('sha512',form.cleaned_data['passcode'].encode(),user_profile.salt, iterations=1000, dklen=64)).decode()
-            request.session['KDFP'] =  base64.b64encode(hashlib.pbkdf2_hmac('sha512',  user_profile.salt + pin.encode() +  user_profile.salt + base64.b64decode(new_hash),user_profile.salt,iterations=1000, dklen=32)).decode()
+            new_hash = base64.b64encode(hashlib.pbkdf2_hmac('sha512',form.cleaned_data['passcode'].encode(),bytes(user_profile.salt), iterations=1000, dklen=64)).decode()
+            request.session['KDFP'] =  base64.b64encode(hashlib.pbkdf2_hmac('sha512',  bytes(user_profile.salt) + pin.encode() +  bytes(user_profile.salt) + base64.b64decode(new_hash),bytes(user_profile.salt),iterations=1000, dklen=32)).decode()
             for data in user_data:
                 data.read_form(data.username, data.email,data.password,request)
                 data.save()
