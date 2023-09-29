@@ -51,8 +51,6 @@ INSTALLED_APPS = [
 ]
 
 # settings.py
-LOGIN_URL = '/login/'
-LOGIN_REDIRECT_URL = '/password_manager/'
 SECURE_SSL_REDIRECT = True
 
 MIDDLEWARE = [
