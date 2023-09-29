@@ -48,6 +48,7 @@ INSTALLED_APPS = [
     'manager',
     'cryptography',
     'django_heroku',
+    'whitenoise.runserver_nostatic',
 ]
 
 # settings.py
@@ -107,7 +108,10 @@ WSGI_APPLICATION = 'spass.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/4.2/ref/settings/#databases
 
+
+
 DATABASES = {
+
 
     'default': {
         'ENGINE': 'django.db.backends.postgresql_psycopg2',
@@ -118,6 +122,7 @@ DATABASES = {
         'PORT': '',
     }
 }
+DATABASES['default'] = dj_database_url.config(conn_max_age=600, ssl_require=True)
 
 
 # Password validation
