@@ -29,7 +29,7 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 SECRET_KEY = os.getenv("DJANGO_SECRET_KEY", get_random_secret_key())
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = os.getenv("DJANGO_DEBUG", "True") == "True"
+DEBUG = True
 
 ALLOWED_HOSTS = ['*']
 
@@ -52,9 +52,9 @@ INSTALLED_APPS = [
 ]
 
 # settings.py
-LOGIN_URL = 'login'
-LOGIN_REDIRECT_URL = 'password_manager'
-
+LOGIN_URL = '/login/'
+LOGIN_REDIRECT_URL = '/password_manager/'
+SECURE_SSL_REDIRECT = True
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
@@ -69,7 +69,7 @@ MIDDLEWARE = [
 
 ]
 
-SESSION_ENGINE = 'django.contrib.sessions.backends.db'
+SESSION_ENGINE = 'django.contrib.sessions.backends.cached_db'
 SESSION_COOKIE_NAME = 'my_session'  
 SESSION_SAVE_EVERY_REQUEST = True  
 SESSION_EXPIRE_AT_BROWSER_CLOSE = True 
@@ -115,11 +115,13 @@ DATABASES = {
 
     'default': {
         'ENGINE': 'django.db.backends.postgresql_psycopg2',
-        'NAME': 'postgres', 
-        'USER': 'postgres',  
-        'PASSWORD': 'iamlars123',  
-        'HOST': 'localhost',
+        'NAME': 'd459ru0k9b2pa7', 
+        'USER': 'hybbxgrfphvxxf',  
+        'PASSWORD': 'bdeac9fd043969e8d69b93c6614603eabe9dbcf579dadc10f85fc8dbecce4ba6',  
+        'HOST': 'ec2-3-210-173-88.compute-1.amazonaws.com',
         'PORT': '',
+        'URI': 'postgres://hybbxgrfphvxxf:bdeac9fd043969e8d69b93c6614603eabe9dbcf579dadc10f85fc8dbecce4ba6@ec2-3-210-173-88.compute-1.amazonaws.com:5432/d459ru0k9b2pa7',
+        'HEROUKU CLI': 'heroku pg:psql postgresql-aerodynamic-15507 --app spass'
     }
 }
 DATABASES['default'] = dj_database_url.config(conn_max_age=600, ssl_require=True)

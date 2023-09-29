@@ -22,6 +22,8 @@ class LoginScreen(LoginView):
     def form_valid(self, form: AuthenticationForm) -> HttpResponse:
         user = form.get_user()
         login(self.request,user)
+        print(self.request.session,'SESION CHECK-----------------------------------------')
+
 
         user_profile = userProfile.objects.get(user=user)
         key = base64.b64encode(hashlib.pbkdf2_hmac('sha512',form.cleaned_data.get('password').encode(),bytes(user_profile.salt), iterations=1000, dklen=64)).decode()
@@ -77,6 +79,7 @@ def create_pin(request,username):
 @login_required
 def enter_pin(request,username):
     if request.method == 'POST':
+        print(request.user,'pin')
         form = PinForm(request.POST)
         if form.is_valid():
             user_profile = userProfile.objects.get(user = username)

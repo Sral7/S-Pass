@@ -11,6 +11,7 @@ from grab_favicon import download_favicon
 from django.core.files import File
 
 # Create your views here.
+@login_required
 def manager_display(request,username):
     user_profile = get_object_or_404(userProfile,user=username )
     if request.user.username == username:
