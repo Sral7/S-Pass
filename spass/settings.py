@@ -51,7 +51,6 @@ INSTALLED_APPS = [
 ]
 
 # settings.py
-SECURE_SSL_REDIRECT = True
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
@@ -75,6 +74,7 @@ if DEBUG is True:
       def __contains__(self, item):
            return True
   INTERNAL_IPS = AllIPS()
+  print(INTERNAL_IPS)
 
 SESSION_ENGINE = 'django.contrib.sessions.backends.cached_db'
 SESSION_COOKIE_NAME = 'my_session'  
