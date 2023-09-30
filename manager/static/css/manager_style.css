@@ -250,8 +250,8 @@ ul a:hover{
         display: flex;
     }
     .content{
-        min-height: 85vh;
-        max-height: 85vh;
+        min-height: 90vh;
+        max-height: 90vh;
     }
     .header-button{
         min-width: 80px;
@@ -264,15 +264,16 @@ ul a:hover{
         height: 100vh;
     }
     .sidebar{
-        grid-row: 2;
+        grid-row: 3;
         grid-column: 1;
         display: flex;
         position: sticky;
-        height: 15vh;
+        height: 10vh;
         min-width: 100vw;
         flex-direction: row;
-        align-self: flex-start;
-
+        align-self: flex-end;
+        z-index: 2;
+        align-items: center;
     }
     .sidebar header{
         display: none;
@@ -281,13 +282,23 @@ ul a:hover{
     .sidebar-settings{
         display: none;
     }
+    .sidebar-info{
+        width: 100%;
+        display: flex;
+        flex-direction: row;
+        justify-content: space-around;
+        align-items: center;
+        margin-top: 35px;
+    }
     .sidebar ul{
         display: flex;
         flex-direction: row;
-        width: 100%;
+        justify-content: space-around;
+        align-items: center;
+        min-width: 100%;
         height: 100%;
         justify-self: center;
-        margin-left: 2.5vw;
+        align-items: flex-end;
     }
     .sidebar li{
         width: min-content;
@@ -295,6 +306,7 @@ ul a:hover{
         border-radius: 10px;
         background-color: #309EAC;
         color: #E3EAE7;
+        align-self: flex-end;
     }
     .sidebar a{
         border: none;
@@ -313,7 +325,7 @@ ul a:hover{
         padding: 10px 0px;
         background-color: #E3EAE7;
         height: min-content;
-        z-index: 2;
+        z-index: 1;
         margin-top:0px ;
     }
     .buttons .rounded_button{
@@ -324,6 +336,10 @@ ul a:hover{
         background-color: #309EAC;
         padding: 10px 0px;
         color: #D9D9D9;
+        position: sticky;
+        bottom: 0;
+        z-index: 1;
+        box-shadow:  0 0 4px rgba(0,0,0,0.3);
     
     }
     .content-container{
