@@ -157,9 +157,6 @@ def generate_password(request,username):
     gen_settings = genSettings.objects.get(user=user_profile)
     context = model_to_dict(gen_settings)
     context['username'] = username
-    print(context)
-    print(f"uppercase: {context['uppercase']}")
-
 
     return render(request, 'manager/gen_pass.html',context)
 
@@ -173,7 +170,6 @@ def gen_settings(request,username):
 
 
 def save_settings(request,username):
-    print(request.method,'save')
     if request.method =='POST':
         user_profile = userProfile.objects.get(user=username)
         gen_settings = genSettings.objects.get(user = user_profile)
