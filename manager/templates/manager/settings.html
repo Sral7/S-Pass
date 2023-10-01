@@ -3,29 +3,32 @@
 <html>
     <head>
         <link rel="stylesheet" href="{% static 'css/settings.css' %}">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
     </head>
     <body>
-        <div class="header">
-            <img src="{% static 'images/logo.png' %}" alt="Website Logo">
-        </div>
         <div class="form">
-            <h2><span style="text-transform: capitalize;">{{username}}</span><span style="text-transform: lowercase;">'s</span> User Settings</h2>
-
-            <div class="user-info">
-                <h3>Change Password:</h3>
-                <a href="{% url 'change_passcode' username %}"><button type="button" class="rounded_button">Change Password</button></a>
+            <div class="settings">
+                <div class="header">
+                    <img src="{% static 'images/logo.png' %}" alt="Website Logo" class="logo_img">
+                </div>
+                <h2><span style="text-transform: capitalize;">{{username}}</span><span style="text-transform: lowercase;">'s</span> User Settings</h2>
+    
+                <div class="user-info">
+                    <h3>Change Password</h3>
+                    <a href="{% url 'change_passcode' username %}"><button type="button" class="rounded_button">Change Password</button></a>
+                </div>
+                <div class="user-info">
+                    <h3>Change Pin</h3>
+                    <a href = "{% url 'change_pin' username%}"><button type="button" class="rounded_button">Change Pin</button></a>
+                </div>
+                <div class="user-info">
+                    <h3 class="long">Generate Password Settings</h3>
+                    <a href = "{% url 'pass_generator_settings' username%}"><button type="button" class="rounded_button">Settings</button></a>
+                </div>
+    
+    
+                <button type="button" class="cancel_rounded_button" onclick="history.back()">Cancel</button>               
             </div>
-            <div class="user-info">
-                <h3>Change Pin:</h3>
-                <a href = "{% url 'change_pin' username%}"><button type="button" class="rounded_button">Change Pin</button></a>
-            </div>
-            <div class="user-info">
-                <h3 class="long">Generate Password Settings:</h3>
-                <a href = "{% url 'pass_generator_settings' username%}"><button type="button" class="rounded_button">Settings</button></a>
-            </div>
-
-            <button type="button" class="cancel_rounded_button" onclick="history.back()">Cancel</button>
-
         </div>
     </body>
 </html>

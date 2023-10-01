@@ -55,6 +55,7 @@ def add_site(request,username):
         gen_settings = genSettings.objects.get(user=user_profile)
         context = model_to_dict(gen_settings)
         context['form'] = form
+        context['username'] = username
 
     return render(request, 'manager/add_site.html',context)
 

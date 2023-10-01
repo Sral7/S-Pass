@@ -19,10 +19,12 @@
                 {% csrf_token %}
                 <div class="form-data">
                     <i class="fa-solid fa-key"></i>
+                    <div id="pin-error" class="error-message"></div>
                     {{ form.pin }}
                 </div>
                 <div class="form-data">
                     <i class="fa-solid fa-key"></i>
+                    <div id="pin-error" class="error-message"></div>
                     {{form.confirm_pin}}
                 </div>
 

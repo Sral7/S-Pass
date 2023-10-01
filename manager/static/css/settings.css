@@ -1,41 +1,49 @@
 body{
     display: flex;
-    flex-direction: column;
     align-items: center;
+    justify-content: center;
     background: rgb(51,184,182);
     background: linear-gradient(180deg, rgba(51,184,182,1) 0%, rgba(227,234,231,1) 100%);
     margin: 0;
     padding: 0;
     background-attachment: fixed;
 }
-.header{
+.logo_img{
+    height: 75px;
+}
+.form{
+    margin: 0;
+    padding: 0px;
+    display: grid;
+    grid-template-columns:  1fr 3fr 1fr;
+    grid-template-rows: auto;
+}
+.settings{
     display: flex;
-    width: 100%;
+    flex-direction: column;
+    height: min-content;
+    margin-top: 50px;
+    max-height: 550px;
+    grid-column: 2;
+    background-color: #E3EAE7;
+    padding: 25px;
+    width: 30vw;
+    min-width: 300px;
+    border-radius: 15px;
+    align-items: center;
+}
 
-}
-.header img{
-    margin: 20px;
-    height: 100px;    
-}
+
 h2{
     text-transform: capitalize;
     text-align: center;
-    font-size: 30px;
-    color: #38596C;
     width: 90%;
     padding-bottom: 5px;
-    border-bottom: 2px solid #38596C; ;
+    border-bottom: 2px solid #38596C;
+    font-size: 24px;
+    color: #38596C;
 }
 
-.form{
-    width: 500px;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    background-color: #e3eae7;
-    border-radius: 15px;
-    padding-bottom: 50px;
-}
 
 .user-info{
     display: flex;
@@ -45,7 +53,7 @@ h2{
 .user-info h3{
     width: 200px;
     font-size: 20px;
-    text-align: right;
+    text-align: center;
     font-weight: bold;
     color: #38596C;
 }

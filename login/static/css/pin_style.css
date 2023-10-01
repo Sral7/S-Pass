@@ -106,7 +106,9 @@ input:focus{
     outline: none;
     border: 2px solid #33B8B6;
 }
-
+input.invalid{
+    border: 2px solid #db492f;
+}
 
 .rounded_button, .cancel_rounded_button{
     width: 70%;

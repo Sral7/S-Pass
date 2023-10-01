@@ -250,8 +250,8 @@ ul a:hover{
         display: flex;
     }
     .content{
-        min-height: 90vh;
-        max-height: 90vh;
+        min-height: 88vh;
+        max-height: 88vh;
     }
     .header-button{
         min-width: 80px;
@@ -268,7 +268,7 @@ ul a:hover{
         grid-column: 1;
         display: flex;
         position: sticky;
-        height: 10vh;
+        height: 12vh;
         min-width: 100vw;
         flex-direction: row;
         align-self: flex-end;
@@ -288,7 +288,7 @@ ul a:hover{
         flex-direction: row;
         justify-content: space-around;
         align-items: center;
-        margin-top: 35px;
+        margin-top: 50px;
     }
     .sidebar ul{
         display: flex;
@@ -314,6 +314,10 @@ ul a:hover{
         display: flex;
 
     }
+    ul a:hover{
+        padding-left: 10px;
+        
+    }
     .buttons{
         width: 100vw;
         display: flex;
@@ -327,6 +331,8 @@ ul a:hover{
         height: min-content;
         z-index: 1;
         margin-top:0px ;
+        box-shadow: 0px 4px 4px rgba(0,0,0,0.3);
+
     }
     .buttons .rounded_button{
         min-width: 60vw;

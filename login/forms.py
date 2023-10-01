@@ -14,13 +14,13 @@ class PinForm(forms.Form):
         label='Enter PIN:',
         min_length=4,  # You can specify the minimum and maximum lengths
         max_length=8,  # for your PIN here.
-        widget=forms.TextInput(attrs={'type': 'number'}),
+        widget=forms.TextInput(attrs={'type': 'number','id':'pin'}),
     )
     confirm_pin = forms.CharField(
         label='Confirm PIN:',
         min_length=4,
         max_length=8,
-        widget=forms.TextInput(attrs={'type': 'number'}),
+        widget=forms.TextInput(attrs={'type': 'number','id':'confirm_pin'}),
     )
 
     def clean(self):
