@@ -116,16 +116,20 @@ WSGI_APPLICATION = 'spass.wsgi.application'
 # https://docs.djangoproject.com/en/4.2/ref/settings/#databases
 
 
-
+from dotenv import load_dotenv
+load_dotenv()
+db_name = os.environ.get('DB_NAME')
+db_user = os.environ.get('DB_USERNAME')
+db_password = os.environ.get('DB_PASSWORD')
+db_host = os.environ.get('DB_HOST')
 DATABASES = {
-
 
     'default': {
         'ENGINE': 'django.db.backends.postgresql_psycopg2',
-        'NAME': 'd459ru0k9b2pa7', 
-        'USER': 'hybbxgrfphvxxf',  
-        'PASSWORD': 'bdeac9fd043969e8d69b93c6614603eabe9dbcf579dadc10f85fc8dbecce4ba6',  
-        'HOST': 'ec2-3-210-173-88.compute-1.amazonaws.com',
+        'NAME': db_name,
+        'USER': db_user,  
+        'PASSWORD': db_password,  
+        'HOST': db_host,
         'PORT': '5432',
     }
 }

@@ -1,75 +1,129 @@
+
 body{
+    background: linear-gradient(to bottom, #33B8B6 0%, #E3EAE7 100%);
+    height: 100vh;
     display: flex;
-    flex-direction: column;
-    align-items: center;
-    background: rgb(51,184,182);
-    background: linear-gradient(180deg, rgba(51,184,182,1) 0%, rgba(227,234,231,1) 100%);
+    justify-content: center;
     margin: 0;
     padding: 0;
-    background-attachment: fixed;
 }
-.header{
-    display: flex;
-    width: 100%;
 
+.logo-img{
+    height: 75px;
 }
-.header img{
-    margin: 20px;
-    height: 100px;    
-}
-h2{
-    text-transform: capitalize;
-    text-align: center;
-    font-size: 30px;
-    color: #38596C;
-    width: 90%;
-    padding-bottom: 5px;
-    border-bottom: 2px solid #38596C; ;
-}
+
 .form{
-    width: 500px;
+    display: grid;
+    grid-template-columns: 1fr 3fr 1fr;
+    grid-template-rows: auto;
+    
+}
+.pin-grid{
+    display: flex;
+    flex-direction: column;
+    height: min-content;
+    margin-top: 50px;
+    max-height: 600px;
+    grid-column: 2;
+    background-color: #E3EAE7;
+    padding: 25px;
+    width: 30vw;
+    min-width: 300px;
+    border-radius: 15px;
+    align-items: center;
+}
+.info{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    height: min-content;
+    height: 25px;
+    margin: 20px 0;
+    width: 90%;
+    border-bottom: 1px solid rgba(0,0,0,0.3);
+}
+
+.pin-grid h2{
+    font-size: 22px;
+    color: #38596C;
+}
+.pin-grid .form-data{
+    display:flex;
+    align-items: center;
+    margin-bottom: 20px;
+    width: 80%;
+    position: relative;
+}
+
+.form i{
+    position: absolute;
+    height: 100%;
+    width: 30px;
+    font-size: 16px;
+    color: #E3EAE7;
+    margin-right: 10px;
+    padding-left: 2px;
+    background-color: #38596C;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 10px 0 0 10px;
+}
+form{
     display: flex;
     flex-direction: column;
     align-items: center;
-    background-color: #e3eae7;
-    border-radius: 15px;
-    padding-bottom: 50px;
-    text-align: center; /* added this line */
 }
 
-form label{
-    display: inline-block;
-    width: 200px;
-    text-align: right;
+
+h2.heading{
+    text-align: center;
+    font-size: 24px;
+    margin: 50px 0px;
+}
+
+.form-data{
+    display: flex;
+    margin-bottom: 20px;
+}
+
+label {
     font-size: 18px;
     font-weight: bold;
-    color: #38596C;
-    text-align: center; /* added this line */
+    width: 120px;
 }
-form input{
-    display: inline-block;
-    width: 200px;
+
+input {
+    text-indent: 35px;
     border-radius: 10px;
     border: 2px solid #38596C;
-    padding: 5px;
-    margin-bottom: 2px;
-    text-align: center;
-    font-size: 15px;
-    text-align: center; /* added this line */
+    padding: 5px 2px;
+    flex: 2;
+    height: 66%;
+    font-size: 16px;
 }
+input:focus{
+    outline: none;
+    border: 2px solid #33B8B6;
+}
+
+input.error{
+    border-color: #db492f;
+}
+
+
 .rounded_button, .cancel_rounded_button{
-    width: 200px;
-    height: 40px;
+    width: 70%;
+    height: 35px;
     margin: 10px;
     border-radius: 10px;
-    border: 0px;
+    border: 5px;
     background-color: rgba(8, 96, 80, 0.30);
     color: #38596C;
     font-size: 14px;
     font-weight: 550;
-    margin-top: 30px;
-    margin-bottom: 20px;
-    box-shadow: 0px 5px 10px rgba(0,0,0,0.25);
+
+    box-shadow: 0px 5px 8px rgba(0,0,0,0.25);
 }
 .rounded_button:hover, .rounded_button:focus{
     background-color: #33B8B6;
@@ -80,7 +134,9 @@ form input{
     background-color: #db492f;
     outline: none;
 }
-input:focus{
-    outline: none;
-    border: 2px solid #33B8B6;
+
+.error-message {
+    color: #38596C;
+    margin-bottom: 20px;
+    font-weight: 600;
 }

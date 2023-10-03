@@ -6,12 +6,12 @@
         <link rel="stylesheet" href ="{% static 'css/gen_pass.css' %}">
     </head>
     <body>
-        <div class="header">
-            <img src="{% static 'images/logo.png' %}" alt="Logo" class="logo-img">
-        </div>
         <div class="form">
             <form class="gen-pass" method="POST">
                 {% csrf_token %}
+                <div class="header">
+                    <img src="{% static 'images/logo.png' %}" alt="Logo" class="logo-img">
+                </div>
                 <div class="output">
                     <input type="text" id="output" value="{{password}}" readonly>
                 </div>
@@ -64,7 +64,7 @@
                     document.getElementById('symbols').checked,
                     document.getElementById('separate').checked,
                     document.getElementById('words').checked)">Generate Password</button>
-                <button type="button" class="cancel_rounded_button" onclick="history.back()">Cancel</button>
+                <a href="{% url 'password_manager' username %}"><button type="button" class="cancel_rounded_button">Cancel</button></a>
             </form>
         </div>
         <script>

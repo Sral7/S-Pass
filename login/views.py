@@ -5,21 +5,25 @@ from django.shortcuts import render, redirect
 from django.urls import reverse
 from django.contrib.auth.views import LoginView
 from django.contrib.auth import login,logout
-from .forms import CreateUser, PinForm
+from .forms import CreateUser, PinForm, CustomAuthForm
 from .models import userProfile
 from manager.models import userData,genSettings
 from django.contrib.auth.decorators import login_required
+from django.core.exceptions import ValidationError
 
 # Create your views here.
 
 class LoginScreen(LoginView):
     template_name ='login/login.html'
+    authentication_form = CustomAuthForm
+
     def get(self,request,*args,**kwargs):
         if self.request.user.is_authenticated:
             logout(request)
         return super().get(request,*args,**kwargs)
     
     def form_valid(self, form: AuthenticationForm) -> HttpResponse:
+        form.is_valid()
         user = form.get_user()
         login(self.request,user)
 
@@ -89,6 +93,8 @@ def enter_pin(request,username):
 
                 request.session['KDFP'] = base64.b64encode(key).decode()
                 return redirect(manager_url)
+            else:
+                form.add_error('pin','Incorrect PIN')
     else:
         form = PinForm()
     return render(request, 'login/decrypt_pin.html',{'form':form})

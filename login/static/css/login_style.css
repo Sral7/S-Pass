@@ -134,3 +134,41 @@ a.create_user_button {
     display: flex;
     justify-content: center;
 }
+.error input{
+    border-color: #db492f !important;
+}
+.error-message {
+    color: #38596C;
+    margin-bottom: 20px;
+    font-weight: 600;
+    text-align: center;
+}
+input.error{
+    border-color: #db492f;
+}
+@media screen and (max-width: 350px){
+    *{
+        box-sizing: border-box;
+    }
+
+    .login{
+        min-width: 90vw;
+        padding: 10%;
+    }
+    .login .form-data{
+        width: 100%;
+    }
+    .logo{
+        min-height: min-content;
+        min-width: min-content;
+    }
+    .logo_img{
+        height: 60;
+        min-height: 20px;
+        min-width: 50px;
+    }
+    .form-data input{
+        width: 100%;
+    }
+
+}

@@ -1,7 +1,6 @@
 .manager_bar{
     display: flex;
     align-items: center;
-    width: calc(100% - 20px);
     justify-content: space-between;
     height: 100px;
     position: sticky;
@@ -381,5 +380,41 @@ ul a:hover{
     .icon{
         width: 90px;
         height: 90px;
+    }
+}
+@media screen and (max-width: 350px) {
+    .manager_bar {
+        flex-wrap: wrap;
+        height: min-content;
+    }
+    .logo{
+        max-width: 90%;
+    }
+    .header-button{
+        max-width: min-content;
+        min-width: min-content;
+    }
+    nav{
+        flex-wrap: wrap;
+
+    }
+    .sidebar{
+        height: min-content;
+        padding-bottom: 10px;
+    }
+    .sidebar-info{
+        margin-top:10px;
+        line-height: 30px;
+    }
+    .sidebar-info ul {
+        flex-wrap: wrap;
+    }
+    .sidebar-info ul li {
+        margin: 5px 0px;
+        width: 100%;
+    }
+    .sidebar ul a{
+        justify-content: center;
+
     }
 }

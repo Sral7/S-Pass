@@ -106,16 +106,18 @@ input:focus{
     outline: none;
     border: 2px solid #33B8B6;
 }
-input.invalid{
-    border: 2px solid #db492f;
+
+input.error{
+    border-color: #db492f;
 }
+
 
 .rounded_button, .cancel_rounded_button{
     width: 70%;
     height: 35px;
     margin: 10px;
     border-radius: 10px;
-    border: 0px;
+    border: 5px;
     background-color: rgba(8, 96, 80, 0.30);
     color: #38596C;
     font-size: 14px;
@@ -131,4 +133,10 @@ input.invalid{
     color: #e3eae7;
     background-color: #db492f;
     outline: none;
+}
+
+.error-message {
+    color: #38596C;
+    margin-bottom: 20px;
+    font-weight: 600;
 }

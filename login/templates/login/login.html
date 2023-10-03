@@ -18,6 +18,9 @@
                 </div>
     
                 {% csrf_token %}
+                {% for error in form.non_field_errors %}
+                    <div class="error-message">{{ error }}</div>
+                {% endfor %}
                 <div class="form-data"><i class="fa fa-user"></i>{{form.username}}</div>
                 
                 <div class="form-data"><i class="fa fa-lock"></i> {{form.password}}</div> 
@@ -27,6 +30,12 @@
 
 
             </form>
+            <script>
+                if ('{{form.non_field_errors}}') {
+                    document.getElementsByClassName("form-data")[0].classList.add('error');
+                    document.getElementsByClassName("form-data")[1].classList.add('error');
+                }
+            </script>
         </div>
     </body>
     <script>
