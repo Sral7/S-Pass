@@ -24,7 +24,7 @@ def manager_display(request,username):
     
 @login_required
 def add_site(request,username):
-
+    
     if request.method =='POST':
         form = dataForm(request.POST)
         if form.is_valid():
@@ -50,6 +50,13 @@ def add_site(request,username):
 
             return redirect('password_manager', username=username)
     else:
+        user_data_qs = userData.objects.filter(user=userProfile.objects.get(user=username))
+        coutner = 0
+        for user_data in user_data_qs:
+            coutner += 1
+        if coutner >= 5:
+            return redirect('password_manager', username=username)
+            
         form = dataForm()
         user_profile = userProfile.objects.get(user=username)
         gen_settings = genSettings.objects.get(user=user_profile)

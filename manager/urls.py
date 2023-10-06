@@ -9,7 +9,6 @@ urlpatterns =[
     path('<str:username>/settings/pass_generator_settings/save_settings', views.save_settings, name ='save_settings'),
     path('<str:username>/settings/change_passcode', views.change_pass, name ='change_passcode'),
     path('<str:username>/settings/change_pin', views.change_pin, name ='change_pin'),
-
     path('<str:username>/settings/',views.user_settings, name ='settings'),
     path('<str:username>/Generate_Password/', views.generate_password, name='generate_password'),
     path('<str:username>/delete_site/<int:entry_id>/', views.delete_site, name='delete_site'),
