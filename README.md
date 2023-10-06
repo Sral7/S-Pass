@@ -6,7 +6,7 @@ With S-Pass, a user can create an account to securely store their username/email
 
 Features
 - User authentication: Users can create accounts and log in to the application.
-- Password management: Users can add, edit, and delete passwords for their websites, which are then encrypted before being saved into a PostgreSQL database.
+- Password management: Users can add, edit, and delete passwords for their websites, which are then encrypted before being saved into a database.
 - Generate passwords: Generate secure and customizable passwords (customizable length, types of characters used, and readability (either full random or employ real words inside the passwords)).
 - Settings: Users can change their master passwords, decryption pin, and their default password generation settings, which are used when generating a password in the edit/add site pages.
 - UI: Responsive website design and displays the logo of each website added.
