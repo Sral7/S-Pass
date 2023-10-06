@@ -1,21 +1,16 @@
 # S-Pass
 
-S-Pass is a password mangement website built using Django, orginally built with the wxPython module. I decided to that a good way to practice html/css and Django would be to make that project into a website and have the UI built using html and css.
-With S-Pass a user can create an account to securely store their username/email/password for any site. The encryption process uses key dervation to derive an encryption key based on the users master password and their decryption pin. The derived key is then used to 
-encrypt and decrypt the data added to S-Pass. If any security flaws or issues presents itself please notify me so I could try and fix it and learn why this could be an issue. The next step for this project is to implement js scripts which I haven't done as I haven't learned Js yet to make a more interactive and pleasing website. Install and run locally with virtual enviroment, steps:
+S-Pass is a password management website built using Django, originally built with the wxPython module. The UI is built using HTML and CSS.
 
-1. Clone the GitHub repository to your local machine using `git clone <repository-url>`.
-2. Navigate to the project folder in the terminal or command prompt.
-3. Install `pipenv` using `pip` by running the command `pip install pipenv`.
-4. Create a new virtual environment for the project using `pipenv` by running the command `pipenv install`. This will create a new virtual environment and install all the required packages specified in the `Pipfile.lock` file.
-5. Activate the virtual environment by running the command `pipenv shell`.
-6. Create a new file named `.env` in the project folder and add the following lines to it:
-    ```
-    SECRET_KEY=<your-secret-key>
-    DEBUG=True
-    ```
-    Replace `<your-secret-key>` with a secret key of your choice.
-7. Run the Django migrations using the command `python manage.py migrate`.
-8. Create a superuser account using the command `python manage.py createsuperuser` and follow the prompts to enter your desired username, email, and password.
-9. Run the development server using the command `python manage.py runserver`.
-10. Open a web browser and navigate to `http://localhost:8000` to view the website. You can log in to the admin panel by navigating to `http://localhost:8000/admin` and entering your superuser credentials.
+With S-Pass, a user can create an account to securely store their username/email/password for any site. The encryption process uses key derivation to derive an encryption key based on the user's master password and their decryption pin. The derived key is then used to encrypt and decrypt the data added to S-Pass. Please feel free to test the site (currently being hosted with Heroku): [https://s-pass-4eb6b9b2c8d8.herokuapp.com/]. However, there is a cap of five sites that can be added to limit costs as this is a personal project. If any security flaws or issues present themselves, please notify me so I can try to fix them and learn why they could be an issue.
+
+Features
+- User authentication: Users can create accounts and log in to the application.
+- Password management: Users can add, edit, and delete passwords for their websites, which are then encrypted before being saved into a database.
+- Generate passwords: Generate secure and customizable passwords (customizable length, types of characters used, and readability (either full random or employ real words inside the passwords)).
+- Settings: Users can change their master passwords, decryption pin, and their default password generation settings, which are used when generating a password in the edit/add site pages.
+- UI: Responsive website design and displays the logo of each website added.
+
+    
+    
+
