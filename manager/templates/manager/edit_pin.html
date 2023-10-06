@@ -2,19 +2,58 @@
 {% load static %}
 <html>
     <head>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <link rel="stylesheet" href="{% static 'css/edit_settings.css' %}">
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css"/>
     </head>
     <body>
-        <div class="header">
-            <img src="{% static 'images/logo.png' %}" alt="Website Logo">
-        </div>
-        <form method="post" class="form">
-            <h2>Change Pin</h2>
-            {% csrf_token %}
-            {{form.as_p}}
-            <button type="submit" class="rounded_button">Change Pin</button>
-            <button type="button" class="cancel_rounded_button" onclick="history.back()">Cancel</button>
+        <div class="form">
+            <form method="post" class="pin-grid">
+                <div class="logo">
+                    <img src="{% static 'images/logo.png' %}" alt="Logo" class="logo-img">
+                </div>
+                <div class="info">
+                    <h2>Change Pin</h2>
+                    <p>or <a href="{% url 'password_manager' username %}">cancel</a></p>
+                </div>
 
-        </form>
+                {% csrf_token %}
+                <div class="form-data">
+                    <i class="fa fa-lock"></i> 
+                    {{form.passcode}}
+                </div> 
+                <div class="form-data">
+                    <i class="fa-solid fa-key"></i>
+                    {{ form.new_pin }}
+                </div>
+
+                <div class="form-data">
+                    <i class="fa-solid fa-key"></i>
+                    {{form.confirm_pin}}
+                </div>
+
+                <button type="submit" class="rounded_button">Save New Password</button>
+                <script>
+                    document.getElementById("pin").focus();
+                    var confirmPinField = document.getElementById("confirm_pin");
+                    var pinField = document.getElementById("pin");
+                    if ('{{ form.errors.confirm_pin }}') {
+                        confirmPinField.classList.add('error');
+                        pinField.classList.add('error');
+                    }
+                    if ('{{ form.errors.pin }}') {
+                        pinField.classList.add('error');
+                        confirmPinField.classList.add('error');
+                    }                 
+                </script>
+
+            </form>
+
+        </div>
     </body>
+    <script>
+        document.getElementsByName("{{form.passcode.name}}")[0].setAttribute("Placeholder","Enter Password");
+        document.getElementsByName("{{form.new_pin.name}}")[0].setAttribute("Placeholder","Enter New PIN");
+        document.getElementsByName("{{form.confirm_pin.name}}")[0].setAttribute("Placeholder","Confirm PIN");
+    </script>
 </html>

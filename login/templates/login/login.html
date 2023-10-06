@@ -2,32 +2,44 @@
 {% load static%}
 <html>
     <head>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <link rel="stylesheet" href="{% static 'css/login_style.css' %}">
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css"/>
     </head>
     <body>
-        <header>
-            <div class="logo">
-                <img src="{% static 'images/logo.png' %}" alt="Logo" class="logo_img">
-            </div>
-            <nav>
-                <a href ="{% url 'register_user' %}" class="create_user_button">
-                    <button type="button" class="rounded_button">Create User</button>
-                </a>
-            </nav>
-        </header>
         <div class="form">
             <form method="post" class="login">
-                <h2>Login</h2>
-                {% csrf_token %}
-                <div class="form-data">{{form.username.label_tag}}{{form.username}}</div>
-                
-                <div class="form-data">{{form.password.label_tag}}{{form.password}}</div> 
-                
-                <div class="buttons">
-                    <button type="submit" class="rounded_button">Login</button>
+                <div class="logo">
+                    <img src="{% static 'images/logo.png' %}" alt="Logo" class="logo_img">
                 </div>
+                <div class="info">
+                    <h2>Login</h2>
+                    <p>Or <a href="{% url 'register_user' %}">Create New User</a></p>
+                </div>
+    
+                {% csrf_token %}
+                {% for error in form.non_field_errors %}
+                    <div class="error-message">{{ error }}</div>
+                {% endfor %}
+                <div class="form-data"><i class="fa fa-user"></i>{{form.username}}</div>
+                
+                <div class="form-data"><i class="fa fa-lock"></i> {{form.password}}</div> 
+                
+
+                <button type="submit" class="rounded_button">Login</button>
+
 
             </form>
+            <script>
+                if ('{{form.non_field_errors}}') {
+                    document.getElementsByClassName("form-data")[0].classList.add('error');
+                    document.getElementsByClassName("form-data")[1].classList.add('error');
+                }
+            </script>
         </div>
     </body>
+    <script>
+        document.getElementsByName("{{form.username.name}}")[0].setAttribute("Placeholder","Enter Username");
+        document.getElementsByName("{{form.password.name}}")[0].setAttribute("Placeholder","Enter Password");
+    </script>
 </html>

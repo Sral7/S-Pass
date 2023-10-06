@@ -2,71 +2,75 @@
 {% load static %}
 <html>
     <head>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <link rel="stylesheet" href ="{% static 'css/gen_pass.css' %}">
     </head>
     <body>
-        <div class="header">
-            <img src="{% static 'images/logo.png' %}" alt="Logo" class="logo-img">
+        <div class="form">
+            <form class="gen-pass" method="POST" action="{% url 'save_settings' username=username %}">
+                {% csrf_token %}
+                <div class="header">
+                    <img src="{% static 'images/logo.png' %}" alt="Logo" class="logo-img">
+                </div>
+                <div class="output">
+                    <input type="text" id="output" value="{{password}}" readonly>
+                </div>
+                <div class="sliders">
+                    <div class="length-box">
+                        <span id="length-value">{{length}}</span>
+                    </div>
+                    <input type="range" id="length" name="length" min="6" max="30" value="{{length}}" oninput="updateLength(this.value)">
+                    <div class="read-box">
+                        <span id="read-value">{{readable}}</span>
+                    </div>
+                    <input type="range" id="readable" name="readable" min="1" max="3" value="{{readable}}" oninput="updateReadable(this.value)">
+                </div>
+                <div class="gen-settings">
+                    <div class="char-settings">
+                        <div class="gen-settings-item">
+                            <input type="checkbox" id="uppercase" name="uppercase" {% if uppercase %}checked{% endif %}>
+                            <label for="uppercase">Uppercase</label>
+                        </div>
+                        <div class="gen-settings-item">
+                            <input type="checkbox" id="lowercase" name="lowercase" {% if lowercase %}checked{% endif %}>
+                            <label for="lowercase">Lowercase</label>
+                        </div>
+                        <div class="gen-settings-item">
+                            <input type="checkbox" id="numbers" name="numbers" {% if numbers %}checked{% endif %}>
+                            <label for="numbers">Numbers</label>
+                        </div>
+                        <div class="gen-settings-item">
+                            <input type="checkbox" id="symbols" name="symbols" {% if symbols %}checked{% endif %}>
+                            <label for="symbols">Symbols</label>
+                        </div>
+                    </div>
+                    <div class="pass-settings">
+                        <div class="gen-settings-item">
+                            <input type="checkbox" id="separate" name="separate"{% if separate %}checked{% endif %}>
+                            <label for="separate">Separate</label>
+                        </div>
+                        <div class="gen-settings-item">
+                            <input type="checkbox" id="words" name="words"{% if words %}checked{% endif %}>
+                            <label for="words">Real Words</label>
+                        </div>
+                    </div>
+                </div>
+                <button type="button" class="rounded_button" onclick="generatePassword(
+                    document.getElementById('length').value,
+                    document.getElementById('readable').value,
+                    document.getElementById('uppercase').checked,
+                    document.getElementById('lowercase').checked,
+                    document.getElementById('numbers').checked,
+                    document.getElementById('symbols').checked,
+                    document.getElementById('separate').checked,
+                    document.getElementById('words').checked)">Generate Password</button>
+                
+                <button type="submit" class="rounded_button">Save Settings</button>
+                <a href="{% url 'password_manager' username %}"><button type="button" class="cancel_rounded_button">Cancel</button></a>
+    
+            </form>
         </div>
-        <form class="form" method="POST" action="{% url 'save_settings' username=username %}">
-            {% csrf_token %}
-            <div class="output">
-                <input type="text" id="output" value="{{password}}" readonly>
-            </div>
-            <div class="sliders">
-                <div class="length-box">
-                    <span id="length-value">{{length}}</span>
-                </div>
-                <input type="range" id="length" name="length" min="6" max="30" value="{{length}}" oninput="updateLength(this.value)">
-                <div class="read-box">
-                    <span id="read-value">{{readable}}</span>
-                </div>
-                <input type="range" id="readable" name="readable" min="1" max="3" value="{{readable}}" oninput="updateReadable(this.value)">
-            </div>
-            <div class="gen-settings">
-                <div class="char-settings">
-                    <div class="gen-settings-item">
-                        <input type="checkbox" id="uppercase" name="uppercase" {% if uppercase %}checked{% endif %}>
-                        <label for="uppercase">Uppercase</label>
-                    </div>
-                    <div class="gen-settings-item">
-                        <input type="checkbox" id="lowercase" name="lowercase" {% if lowercase %}checked{% endif %}>
-                        <label for="lowercase">Lowercase</label>
-                    </div>
-                    <div class="gen-settings-item">
-                        <input type="checkbox" id="numbers" name="numbers" {% if numbers %}checked{% endif %}>
-                        <label for="numbers">Numbers</label>
-                    </div>
-                    <div class="gen-settings-item">
-                        <input type="checkbox" id="symbols" name="symbols" {% if symbols %}checked{% endif %}>
-                        <label for="symbols">Symbols</label>
-                    </div>
-                </div>
-                <div class="pass-settings">
-                    <div class="gen-settings-item">
-                        <input type="checkbox" id="separate" name="separate"{% if separate %}checked{% endif %}>
-                        <label for="separate">Separate</label>
-                    </div>
-                    <div class="gen-settings-item">
-                        <input type="checkbox" id="words" name="words"{% if words %}checked{% endif %}>
-                        <label for="words">Real Words</label>
-                    </div>
-                </div>
-            </div>
-            <button type="button" class="rounded_button" onclick="generatePassword(
-                document.getElementById('length').value,
-                document.getElementById('readable').value,
-                document.getElementById('uppercase').checked,
-                document.getElementById('lowercase').checked,
-                document.getElementById('numbers').checked,
-                document.getElementById('symbols').checked,
-                document.getElementById('separate').checked,
-                document.getElementById('words').checked)">Generate Password</button>
-            
-            <button type="submit" class="rounded_button">Save Settings</button>
-            <button type="button" class="cancel_rounded_button" onclick="history.back()">Cancel</button>
 
-        </form>
         <script>
             const TEXT1_URL = "{% static 'images/text1.txt' %}";
         </script>

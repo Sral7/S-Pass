@@ -1,7 +1,6 @@
 .manager_bar{
     display: flex;
     align-items: center;
-    width: calc(100% - 20px);
     justify-content: space-between;
     height: 100px;
     position: sticky;
@@ -235,27 +234,187 @@ ul a:hover{
 
 @media (max-width: 800px) {
 
-    .sidebar{
-        max-width: 150px;
-        min-width: 150px;
+    *{
+        box-sizing: border-box;
     }
-    ul a{
-        padding: 0 10px;
-    }
-    ul a:hover{
-        padding-left: 15px;
+
+    .manager_bar{
+        width: 100vw;
+        padding: 10px;
     }
     .manager_bar .logo{
         max-height: 50px;
     }
-    .header-button{
-        max-width: 40px;
-        margin-right: 50px;
+    nav{
+        display: flex;
     }
-    .sidebar-info, .sidebar-settings{
-        line-height: 25px;
+    .content{
+        min-height: 88vh;
+        max-height: 88vh;
+    }
+    .header-button{
+        min-width: 80px;
+        max-width: 80px;
+    }
+    .container{
+        display: grid;
+        grid-template-columns: 100vw;
+        grid-template-rows: auto auto;
+        height: 100vh;
+    }
+    .sidebar{
+        grid-row: 3;
+        grid-column: 1;
+        display: flex;
+        position: sticky;
+        height: 12vh;
+        min-width: 100vw;
+        flex-direction: row;
+        align-self: flex-end;
+        z-index: 2;
+        align-items: center;
+    }
+    .sidebar header{
+        display: none;
+    }
+
+    .sidebar-settings{
+        display: none;
+    }
+    .sidebar-info{
+        width: 100%;
+        display: flex;
+        flex-direction: row;
+        justify-content: space-around;
+        align-items: center;
+        margin-top: 50px;
+    }
+    .sidebar ul{
+        display: flex;
+        flex-direction: row;
+        justify-content: space-around;
+        align-items: center;
+        min-width: 100%;
+        height: 100%;
+        justify-self: center;
+        align-items: flex-end;
+    }
+    .sidebar li{
+        width: min-content;
+        margin: 0 10px;
+        border-radius: 10px;
+        background-color: #309EAC;
+        color: #E3EAE7;
+        align-self: flex-end;
+    }
+    .sidebar a{
+        border: none;
+        padding: 0px 10px;
+        display: flex;
+
+    }
+    ul a:hover{
+        padding-left: 10px;
+        
+    }
+    .buttons{
+        width: 100vw;
+        display: flex;
+        flex-direction: row;
+        justify-content: center;
+        align-items: center;
+        position: sticky;
+        bottom: 0;
+        padding: 10px 0px;
+        background-color: #E3EAE7;
+        height: min-content;
+        z-index: 1;
+        margin-top:0px ;
+        box-shadow: 0px 4px 4px rgba(0,0,0,0.3);
+
+    }
+    .buttons .rounded_button{
+        min-width: 60vw;
+        margin: 10px 10px;
+        border-radius: 10px;
+        border: 0px;
+        background-color: #309EAC;
+        padding: 10px 0px;
+        color: #D9D9D9;
+        position: sticky;
+        bottom: 0;
+        z-index: 1;
+        box-shadow:  0 0 4px rgba(0,0,0,0.3);
     
     }
-
+    .content-container{
+        min-width: 100vw;
+        max-width: 100vw;
+        display: flex;
+        flex-direction: column;
+        box-sizing: border-box;
+        margin: 0;
+        padding: 0;
+        align-items: center;
+        justify-content: center;
+    }
+    .user_data{
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: flex-start;
+        overflow-y: auto;
+        flex-wrap: nowrap;
+        min-width: 100vw;
+        max-width: 100vw;
+    }
+    .user_data_item {
+        min-height: 200px;
+        max-height: 70vh; 
+        min-width: 70vw;
+        max-width: 70vw;
+      }
+    .item_icon{
+        min-height: 100px;
+    }
+    .icon{
+        width: 90px;
+        height: 90px;
+    }
+}
+@media screen and (max-width: 350px) {
+    .manager_bar {
+        flex-wrap: wrap;
+        height: min-content;
+    }
+    .logo{
+        max-width: 90%;
+    }
+    .header-button{
+        max-width: min-content;
+        min-width: min-content;
+    }
+    nav{
+        flex-wrap: wrap;
 
     }
+    .sidebar{
+        height: min-content;
+        padding-bottom: 10px;
+    }
+    .sidebar-info{
+        margin-top:10px;
+        line-height: 30px;
+    }
+    .sidebar-info ul {
+        flex-wrap: wrap;
+    }
+    .sidebar-info ul li {
+        margin: 5px 0px;
+        width: 100%;
+    }
+    .sidebar ul a{
+        justify-content: center;
+
+    }
+}

@@ -2,18 +2,49 @@
 {% load static %}
 <html>
     <head>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <link rel="stylesheet" href="{% static 'css/edit_site.css' %}">
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css"/>
     </head>
     <body>
-        <div class="header">
-            <img src="{% static 'images/logo.png' %}" alt="Website Logo">
-        </div>
         <div class="form">
-            <form method="post">
-                <h1>Edit Site</h1>
+            <form method="post" class="edit_site">
+                <div class="header">
+                    <img src="{% static 'images/logo.png' %}" alt="Website Logo" class="logo_img">
+                </div>
+                <div class="info">
+                    <h2>Edit Site</h2>
+                    <p>or <a href="{% url 'password_manager' username %}">cancel</a></p>
+                </div>
                 {% csrf_token %}
-                {{form.as_p}}
-                <button type="submit" class="rounded_button">Confirm</button>
+                <div class="form-data">
+                    <i class="fa-solid fa-sitemap"></i>
+                    {{ form.site }}
+                </div>
+                <div class="form-data">
+                    <i class="fa-solid fa-link"></i>
+                    {{ form.url }}
+                </div>
+                <div class="form-data">
+                    <i class="fa fa-user"></i>
+                    {{ form.dec_username }}
+                </div>
+    
+                <div class="form-data">
+                    <i class="fa-regular fa-envelope"></i>
+                    {{ form.dec_email }}
+                </div>
+    
+                <div class="form-data">
+                    <i class="fa fa-lock"></i>
+                    {{ form.dec_password }}
+                </div>
+    
+    
+    
+                {% csrf_token %}
+                
+                <button type="submit" class="rounded_button">Add Site</button>
                 <button type="button" class="rounded_button" onclick="generatePassword(
                     '{{ length }}',
                     '{{ readable }}',   
@@ -23,12 +54,13 @@
                     '{{ symbols }}',
                     '{{ separate }}',
                     '{{ words }}'
-                )">Generate New Password</button>
-                <button type="button" class="cancel_rounded_button" onclick="history.back()">Cancel</button>
+                )">Generate Password</button>
+    
                 <script>
                     const TEXT1_URL = "{% static 'images/text1.txt' %}";
                 </script>
                 <script src="{% static 'js/gen_pass.js' %}"></script>
+
             </form>
             <form method="post" action="{% url 'delete_site' username=username entry_id=entry_id %}" class="delete" onsubmit="return confirm('All Data Pertaining To This Site Will Be Deleted. Are You Sure You Want To Continue?')">
                 {% csrf_token %}

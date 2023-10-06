@@ -51,7 +51,6 @@ INSTALLED_APPS = [
 ]
 
 # settings.py
-SECURE_SSL_REDIRECT = True
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
@@ -75,8 +74,9 @@ if DEBUG is True:
       def __contains__(self, item):
            return True
   INTERNAL_IPS = AllIPS()
+  print(INTERNAL_IPS)
 
-SESSION_ENGINE = 'django.contrib.sessions.backends.cached_db'
+SESSION_ENGINE = 'django.contrib.sessions.backends.db'
 SESSION_COOKIE_NAME = 'my_session'  
 SESSION_SAVE_EVERY_REQUEST = True  
 SESSION_EXPIRE_AT_BROWSER_CLOSE = True 
@@ -116,22 +116,26 @@ WSGI_APPLICATION = 'spass.wsgi.application'
 # https://docs.djangoproject.com/en/4.2/ref/settings/#databases
 
 
-
+from dotenv import load_dotenv
+load_dotenv()
+db_name = os.environ.get('DB_NAME')
+db_user = os.environ.get('DB_USERNAME')
+db_password = os.environ.get('DB_PASSWORD')
+db_host = os.environ.get('DB_HOST')
 DATABASES = {
-
 
     'default': {
         'ENGINE': 'django.db.backends.postgresql_psycopg2',
-        'NAME': 'd459ru0k9b2pa7', 
-        'USER': 'hybbxgrfphvxxf',  
-        'PASSWORD': 'bdeac9fd043969e8d69b93c6614603eabe9dbcf579dadc10f85fc8dbecce4ba6',  
-        'HOST': 'ec2-3-210-173-88.compute-1.amazonaws.com',
-        'PORT': '',
-        'URI': 'postgres://hybbxgrfphvxxf:bdeac9fd043969e8d69b93c6614603eabe9dbcf579dadc10f85fc8dbecce4ba6@ec2-3-210-173-88.compute-1.amazonaws.com:5432/d459ru0k9b2pa7',
-        'HEROUKU CLI': 'heroku pg:psql postgresql-aerodynamic-15507 --app spass'
+        'NAME': db_name,
+        'USER': db_user,  
+        'PASSWORD': db_password,  
+        'HOST': db_host,
+        'PORT': '5432',
     }
 }
-DATABASES['default'] = dj_database_url.config(conn_max_age=600, ssl_require=True)
+# settings.py
+LOGIN_URL = '/'
+LOGIN_REDIRECT_URL = None
 
 # Password validation
 # https://docs.djangoproject.com/en/4.2/ref/settings/#auth-password-validators

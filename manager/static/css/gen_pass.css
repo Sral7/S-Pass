@@ -8,22 +8,30 @@ body{
     padding: 0;
     background-attachment: fixed;
 }
-.header{
-    display: flex;
-    width: 100%;
+.logo-img{
+    height: 100px;
+}
 
-}
-.header img{
-    margin: 20px;
-    height: 100px;    
-}
 .form{
-    width: 500px;
+    margin: 0;
+    padding: 0px;
+    display: grid;
+    grid-template-columns:  1fr 3fr 1fr;
+    grid-template-rows: auto;
+}
+.gen-pass{
     display: flex;
     flex-direction: column;
-    align-items: center;
-    background-color: #e3eae7;
+    height: min-content;
+    margin-top: 20px;
+    max-height: 590px;
+    grid-column: 2;
+    background-color: #E3EAE7;
+    padding: 25px;
+    width: 30vw;
+    min-width: 300px;
     border-radius: 15px;
+    align-items: center;
 }
 .output{
     margin: 20px 0;
@@ -70,6 +78,7 @@ body{
     width: 60%;
     margin: 20px 0;
 }
+
 .char-settings{
     display: flex;
     flex-direction: column;
@@ -130,4 +139,11 @@ input:focus{
     background-color: #db492f;
     outline: none;
 }
+@media screen and (max-width: 1170px){
+    .gen-settings{
+        width: 80%;
+    }
+}
+    
+
 

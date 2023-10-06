@@ -2,35 +2,60 @@
 {% load static %}
 <html>
     <head>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <link rel="stylesheet" href="{% static 'css/pin_style.css' %}">
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css"/>
     </head>
     <body>
-        <header>
-            <img src="{% static 'images/logo.png' %}" alt="Logo" class="logo-img">
-        </header>
-        <div class="pin">
-            <div class="pin-grid">
-                <form method="post">
-                    <h2 class="heading">Enter Decryption Pin</h2>
-                    {% csrf_token %}
-                    <div class="form-data">
-                        <label>{{ form.pin.label_tag }}</label>
-                        {{ form.pin }}<br><br>
-                    </div>
-                    <div class="form-data">
-                        <label>{{form.confirm_pin.label_tag}}</label>
-                        {{form.confirm_pin}}<br>
-                    </div>
+        <div class="form">
+            <form method="post" class="pin-grid">
+                <div class="logo">
+                    <img src="{% static 'images/logo.png' %}" alt="Logo" class="logo-img">
+                </div>
+                <div class="info">
+                    <h2>Enter Decryption Pin</h2>
+                </div>
 
-                    <button type="submit" class="rounded_button">Enter Pin</button>
-                    <button type="button" class="cancel_rounded_button" onclick="history.back()">Cancel</button>
-                    <script>
-                        document.getElementById("id_pin").focus();
-                    </script>
+                {% csrf_token %}
+                
+                {% for error in form.pin.errors %}
+                    <div class="error-message">{{ error }}</div>
+                {% endfor %}
+                {% for error in form.confirm_pin.errors %}
+                <div class="error-message">{{ error }}</div>
+                {% endfor %}
+                <div class="form-data">
+                    <i class="fa-solid fa-key"></i>
+                    {{ form.pin }}
+                </div>
 
-                </form>
-            </div>
+                <div class="form-data">
+                    <i class="fa-solid fa-key"></i>
+                    {{form.confirm_pin}}
+                </div>
+                <button type="submit" class="rounded_button">Enter Pin</button>
+                <button type="button" class="cancel_rounded_button" onclick="history.back()">Cancel</button>
+                <script>
+                    document.getElementById("pin").focus();
+                    var confirmPinField = document.getElementById("confirm_pin");
+                    var pinField = document.getElementById("pin");
+                    if ('{{ form.errors.confirm_pin }}') {
+                        confirmPinField.classList.add('error');
+                        pinField.classList.add('error');
+                    }
+                    if ('{{ form.errors.pin }}') {
+                        pinField.classList.add('error');
+                        confirmPinField.classList.add('error');
+                    }
+                                        
+                </script>
+
+            </form>
 
         </div>
     </body>
+    <script>
+        document.getElementsByName("{{form.pin.name}}")[0].setAttribute("Placeholder","Enter PIN");
+        document.getElementsByName("{{form.confirm_pin.name}}")[0].setAttribute("Placeholder","Confirm PIN");
+    </script>
 </html>
