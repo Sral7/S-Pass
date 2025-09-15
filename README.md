@@ -11,6 +11,6 @@ Features
 - Settings: Users can change their master passwords, decryption pin, and their default password generation settings, which are used when generating a password in the edit/add site pages.
 - UI: Responsive website design and displays the logo of each website added.
 
-    
+![Project Demo ](Demo.png)    
     
 
