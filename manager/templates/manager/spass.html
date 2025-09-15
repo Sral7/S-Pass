@@ -42,7 +42,7 @@
                             {% for data in user_data %}
                             <div class="user_data_item" onclick="window.location.href = '{{data.url}}/login';">
                                 <div class="item_icon">
-                                    <img src="{{ data.website.icon.url }}" alt="{{ data.site }}" class="icon">
+                                    <img src="https://t2.gstatic.com/faviconV2?client=SOCIAL&type=FAVICON&fallback_opts=TYPE,SIZE,URL&url={{ data.website.url }}&size=64" alt="{{ data.site }}" class="icon">
                                     <a href="{% url 'edit_site' username data.id %}"><button type='button' class="data-button">Edit Site</button></a><br>
                                 </div>
                                 <div class="item_data">
