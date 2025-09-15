@@ -39,15 +39,6 @@ def add_site(request,username):
             user_data.website = website
             user_data.save()
 
-            if created or not website.icon:
-                user_data.url = user_data.url.split("//")[-1].split("/")[0]
-                download_favicon(user_data.url, size=64,path='manager/favicons/',silent=True)
-                website.icon.save(f'{user_data.site}.png',  File(open('manager/favicons/' + f'{user_data.url}.png', 'rb')),save=True)
-                user_data.url = "https://" + user_data.url
-                website.url = user_data.url
-                website.save()
-                user_data.save()
-
             return redirect('password_manager', username=username)
     else:
         user_data_qs = userData.objects.filter(user=userProfile.objects.get(user=username))
